@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
 import styled from 'styled-components';
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <GlobalStyles />

@@ -37,6 +37,18 @@ const getSingleItem = async (req, res) => {
 };
 
 // To Do?
+const updateItem = async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db();
+
+    res.status(200).json({ status: 200, data: result });
+  } catch (err) {
+    res.status(404).json({ status: 404, data: err });
+  }
+};
+
+// Possible To Do - Stretch
 const postPurchasedItem = async (req, res) => {
   try {
     await client.connect();
@@ -48,19 +60,7 @@ const postPurchasedItem = async (req, res) => {
   }
 };
 
-// To Do?
-const patchPurchasedItem = async (req, res) => {
-  try {
-    await client.connect();
-    const db = client.db();
-
-    res.status(200).json({ status: 200, data: result });
-  } catch (err) {
-    res.status(404).json({ status: 404, data: err });
-  }
-};
-
-// To Do?
+// Possible To Do - Stretch
 const deleteCart = async (req, res) => {
   try {
     await client.connect();
@@ -75,7 +75,7 @@ const deleteCart = async (req, res) => {
 module.exports = {
   getAllItems,
   getSingleItem,
+  updateItem,
   postPurchasedItem,
-  patchPurchasedItem,
   deleteCart,
 };
