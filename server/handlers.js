@@ -44,10 +44,12 @@ const getSingleItem = async (req, res) => {
 
 // Update the number in stock of a product in the "products" collection
 const updateItem = async (req, res) => {
-  const _id = parseInt(req.params.id);
+  const _id = parseInt(req.params._id);
   const newNumInStock = req.body;
+  console.log(_id)
+
   console.log(newNumInStock)
-  
+
   try {
     await client.connect();
     const db = client.db("EcommerceDatabse");
