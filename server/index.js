@@ -31,10 +31,10 @@ express()
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))
 
-  // REST endpoints?
+  // REST endpoints
   .get("/products", getAllItems)
   .get("/products/:_id", getSingleItem)
-  .patch("/products", updateItem)
+  .patch("/products/:_id", updateItem)
   // .post("/cart", postPurchasedItem) //stretch
   // .delete("/cart", deleteCart) //stretch
 
