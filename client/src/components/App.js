@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // import GlobalStyles from "./GlobalStyles";
 import styled from 'styled-components';
+import ItemCard from './ItemCard';
 
 import Header from "./Header";
 
@@ -15,9 +16,7 @@ const App = () => {
           <Route
             path="/"
           />
-          <Route
-            path="/products/"
-          />
+          <Route path="/products/:_id" element={<ItemCard />}/>
           <Route
             path="/cart"
           />
