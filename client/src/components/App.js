@@ -10,17 +10,13 @@ const App = () => {
   return (
     <BrowserRouter>
       {/* <GlobalStyles /> */}
-
       <Header/>
-
       <AppContainer>
         <Routes>
           <Route
             path="/"
           />
-
           <Route path="/products/:_id" element={<ItemCard />}/>
-
           <Route
             path="/cart"
           />
