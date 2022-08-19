@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import GlobalStyles from "./GlobalStyles";
+// import GlobalStyles from "./GlobalStyles";
 import styled from 'styled-components';
+
+import Header from "./Header";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <GlobalStyles />
-      {/* <Header/> */}
+      {/* <GlobalStyles /> */}
+      <Header/>
       <AppContainer>
         <Routes>
           <Route
             path="/"
           />
           <Route
-            path="/product"
+            path="/products/"
           />
           <Route
             path="/cart"
