@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import GlobalStyles from "./GlobalStyles";
+// import GlobalStyles from "./GlobalStyles";
 import styled from 'styled-components';
+import Cart from './Cart';
 
 const App = () => {
   return (
     <BrowserRouter>
-      <GlobalStyles />
+      {/* <GlobalStyles /> */}
       {/* <Header/> */}
       <AppContainer>
         <Routes>
@@ -14,10 +15,11 @@ const App = () => {
             path="/"
           />
           <Route
-            path="/product"
+            path="/products/:_id"
           />
           <Route
             path="/cart"
+            element={<Cart />}
           />
           <Route path="" element={<h1>404: Oops!</h1>} />
         </Routes>
