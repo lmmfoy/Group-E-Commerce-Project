@@ -10,7 +10,7 @@ const options = {
 const items = require("./data/items.json");
 const companies = require("./data/companies.json");
 
-//function that will import the data to MongoDB
+//function that will import the data to MongoDB;
 //Project Database name: EcommerceDatabase, collections: products
 const batchImport = async (dbName) => {
   const client = new MongoClient(MONGO_URI);
