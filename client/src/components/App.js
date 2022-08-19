@@ -4,11 +4,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import styled from 'styled-components';
 import ItemCard from './ItemCard';
 
+import Header from "./Header";
+
 const App = () => {
   return (
     <BrowserRouter>
       {/* <GlobalStyles /> */}
-      {/* <Header/> */}
+      <Header/>
       <AppContainer>
         <Routes>
           <Route
