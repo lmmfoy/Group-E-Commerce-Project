@@ -8,7 +8,9 @@ const Header = () => {
         <Wrapper>
             <Nav>
                     <StyledNavLink to="/"><FiHome/></StyledNavLink> 
-                    <StyledNavLink to="/cart"><FiShoppingCart/></StyledNavLink> 
+                    <StyledNavLink to="/products"> Products</StyledNavLink>
+                    <StyledNavLink to="/cart"><FiShoppingCart/></StyledNavLink>
+
             </Nav>
         </Wrapper>
     )
