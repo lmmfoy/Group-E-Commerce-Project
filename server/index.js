@@ -33,7 +33,7 @@ express()
 
   // REST endpoints?
   .get("/products", getAllItems)
-  .get("/products:id", getSingleItem)
+  .get("/products/:_id", getSingleItem)
   .patch("/products", updateItem)
   // .post("/cart", postPurchasedItem) //stretch
   // .delete("/cart", deleteCart) //stretch
