@@ -47,6 +47,7 @@ const ItemCard = () => {
     </Wrapper>
   )
 }
+//difficulty pushing
 
 export default ItemCard;
 
