@@ -12,46 +12,53 @@ const options = {
 
 const client = new MongoClient(MONGO_URI, options);
 
-// To Do
+// Get an array of all products in "products" collection
 const getAllItems = async (req, res) => {
   try {
     await client.connect();
-    const db = client.db('EcommerceDatabse');
+    const db = client.db("EcommerceDatabse");
 
     const result = await db.collection("products").find().toArray();
-    
+
     res.status(200).json({ status: 200, data: result });
   } catch (err) {
     res.status(404).json({ status: 404, data: err });
   }
 };
 
-// To Do
+// Get specific product based on id
 const getSingleItem = async (req, res) => {
-  // const item = req.params.item;
   const _id = parseInt(req.params._id);
-  
+
   try {
     await client.connect();
-    const db = client.db('EcommerceDatabse');
+    const db = client.db("EcommerceDatabse");
 
     const result = await db.collection("products").findOne({ _id });
 
-    res.status(200).json({ status: 200, _id,  data: result });
+    res.status(200).json({ status: 200, _id, data: result });
   } catch (err) {
     res.status(404).json({ status: 404, data: err });
   }
 };
 
-// To Do?
+// Update the number in stock of a product in the "products" collection
 const updateItem = async (req, res) => {
+  const _id = parseInt(req.params.id);
+  const newNumInStock = req.body;
+  console.log(newNumInStock)
+  
   try {
     await client.connect();
-    const db = client.db();
+    const db = client.db("EcommerceDatabse");
+
+    const result = await db
+      .collection("products")
+      .updateOne({ _id }, { $set: { numInStock: newNumInStock } });
 
     res.status(200).json({ status: 200, data: result });
   } catch (err) {
-    res.status(404).json({ status: 404, data: err });
+    res.status(404).json({ status: 404, data: err.message });
   }
 };
 
