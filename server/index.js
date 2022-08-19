@@ -6,8 +6,8 @@ const morgan = require("morgan");
 const {
   getAllItems,
   getSingleItem,
+  updateItem,
   postPurchasedItem,
-  patchPurchasedItem,
   deleteCart,
 } = require("handers.js");
 
@@ -31,11 +31,11 @@ express()
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))
 
-  // REST endpoints
+  // REST endpoints?
   .get("/products", getAllItems)
   .get("/products:id", getSingleItem)
-  // .post("/cart", postPurchasedItem)
-  // .patch("/cart", patchPurchasedItem)
-  // .delete("/cart", deleteCart)
+  .patch("/products", updateItem)
+  // .post("/cart", postPurchasedItem) //stretch
+  // .delete("/cart", deleteCart) //stretch
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
