@@ -18,6 +18,8 @@ const getAllItems = async (req, res) => {
     await client.connect();
     const db = client.db();
 
+    const result = await db.collection("products").find().toArray;
+
     res.status(200).json({ status: 200, data: result });
   } catch (err) {
     res.status(404).json({ status: 404, data: err });
@@ -26,9 +28,13 @@ const getAllItems = async (req, res) => {
 
 // To Do
 const getSingleItem = async (req, res) => {
+  const item = req.params.item;
+
   try {
     await client.connect();
     const db = client.db();
+
+    const result = await db.collection("products").findOne({ _id: item });
 
     res.status(200).json({ status: 200, data: result });
   } catch (err) {

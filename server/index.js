@@ -9,7 +9,7 @@ const {
   updateItem,
   postPurchasedItem,
   deleteCart,
-} = require("handers.js");
+} = require("./handlers.js");
 
 const PORT = 4000;
 
