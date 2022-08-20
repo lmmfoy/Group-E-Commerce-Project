@@ -25,6 +25,30 @@ const Cart = () => {
   // This is to get the page to rerender when someone increases or decreases the number of items they want - probably something should actually happen in it
   useEffect(() => {}, [cartState]);
 
+  const handlePlaceOrder = (e) => {
+    e.preventDefault();
+
+    const finalCart = JSON.parse(sessionStorage.getItem("cart"));
+  
+    // For each item in the final cart, update the number of items in stock in the "products" database
+    Object.values(finalCart).forEach((item) => {
+      const newNumInStock = item.numInStock - item.quantity;
+
+      fetch(`/products/${item._id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          numInStock: newNumInStock,
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((json) => console.json);
+    });
+  };
+
   return (
     <StyledCart>
       <div>
@@ -34,7 +58,7 @@ const Cart = () => {
           return (
             <div class="cart-item">
               <span>{item.name}</span>
-              <span>{(itemPrice * item.quantity).toFixed(2)}</span>
+              <span>{itemPrice}</span>
               <span>
                 <input
                   id={item._id}
@@ -51,11 +75,19 @@ const Cart = () => {
                   }}
                 />{" "}
               </span>
+              <span>{(itemPrice * item.quantity).toFixed(2)}</span>
             </div>
           );
         })}
       </div>
       <div>{total.toFixed(2)}</div>
+      <div>
+        <input
+          type="button"
+          value="Place your order"
+          onClick={handlePlaceOrder}
+        />
+      </div>
     </StyledCart>
   );
 };
