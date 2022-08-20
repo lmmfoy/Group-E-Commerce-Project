@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // import GlobalStyles from "./GlobalStyles";
 import styled from 'styled-components';
+import Homepage from './Homepage';
+import CategoryFeed from './CategoryFeed';
 
 import Cart from './Cart';
 import ItemCard from './ItemCard';
@@ -19,7 +21,10 @@ const App = () => {
       <AppContainer>
         <Routes>
           <Route
-            path="/"
+            path="/" element={<Homepage/>}
+          />
+          <Route
+            path="/products/:category" element={<CategoryFeed/>}
           />
           <Route path="products" element={<ProductPage setLoading={setLoading} loading ={loading}/>}/>
           <Route path="/products/:_id" element={<ItemPage/>}/>
