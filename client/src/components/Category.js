@@ -19,7 +19,7 @@ const Category = () => {
     const { setSelectedCategory} = useContext(ItemsContext);
     const handleSelectedCategory = (category) => {
         setSelectedCategory(category);
-        navigate(`/products/${category}`)
+        navigate(`/products/categories/${category}`)
         
     }
     return(

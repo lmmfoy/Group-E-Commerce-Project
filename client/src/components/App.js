@@ -24,7 +24,7 @@ const App = () => {
             path="/" element={<Homepage/>}
           />
           <Route
-            path="/products/:category" element={<CategoryFeed/>}
+            path="/products/categories/:category" element={<CategoryFeed/>}
           />
           <Route path="products" element={<ProductPage setLoading={setLoading} loading ={loading}/>}/>
           <Route path="/products/:_id" element={<ItemPage/>}/>
