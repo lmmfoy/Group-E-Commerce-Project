@@ -2,12 +2,12 @@ import { useEffect, useState, useLocation } from "react";
 import styled from "styled-components";
 
 const Cart = () => {
-  const location = useLocation().state;
+  // const location = useLocation().state;
   const [cartItems, setCartItems] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
-    fetch(`/products/${location._id}`)
+    fetch(`/products/${6548}`)
       .then((res) => res.json())
       .then((data) => {
         const { _id, name, price } = data.data;
@@ -40,7 +40,8 @@ const Cart = () => {
           // Add the first item to the cartItems array
           setCartItems([{ _id: _id, name: name, price: price, count: 1 }]);
         }
-      });
+      })
+      .then(sessionStorage.setItem("cart", cartItems))
   }, []);
 
   console.log(cartItems);
