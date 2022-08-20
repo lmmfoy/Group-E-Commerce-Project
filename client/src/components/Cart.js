@@ -2,7 +2,7 @@ import { useEffect, useState, useLocation } from "react";
 import styled from "styled-components";
 
 const Cart = () => {
-  // const location = useLocation().state;
+  const location = useLocation();
   const [cartState, setCartState] = useState(null);
   let cart;
 
@@ -14,7 +14,7 @@ const Cart = () => {
 
 
   useEffect(() => {
-    fetch(`products/${6544}`)
+    fetch(`products/${location.state._id}`)
       .then((res) => res.json())
       .then((data) => {
         const item = data.data;
