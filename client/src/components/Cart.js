@@ -2,33 +2,33 @@ import { useEffect, useState, useLocation } from "react";
 import styled from "styled-components";
 
 const Cart = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const [cartState, setCartState] = useState(null);
   let cart;
 
+  // Checks sessionStorage to see if there are already items in the cart, if not assigns cart variable empty object
   if (sessionStorage.getItem("cart")) {
-    cart = JSON.parse(sessionStorage.getItem("cart"));  
+    cart = JSON.parse(sessionStorage.getItem("cart"));
   } else {
     cart = {};
   }
 
+  // useEffect(() => {
+  //   fetch(`products/${6547}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const item = data.data;
 
-  useEffect(() => {
-    fetch(`products/${location.state._id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const item = data.data;
-        
-        const itemID = item._id;
+  //       const itemID = item._id;
 
-        if (!cart[itemID]) {
-          cart[itemID] = {...item, quantity: 1};
-        } else {
-          cart[itemID].quantity = cart[itemID].quantity + 1;
-        }
-        sessionStorage.setItem("cart", JSON.stringify(cart))
-      });
-  });
+  //       if (!cart[itemID]) {
+  //         cart[itemID] = {...item, quantity: 1};
+  //       } else {
+  //         cart[itemID].quantity = cart[itemID].quantity + 1;
+  //       }
+  //       sessionStorage.setItem("cart", JSON.stringify(cart))
+  //     });
+  // });
 
   return (
     <StyledCart>
