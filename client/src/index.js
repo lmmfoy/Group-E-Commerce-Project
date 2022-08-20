@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
+import {ItemsProvider } from './components/ItemsContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ItemsProvider>
+        <App />
+    </ItemsProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
