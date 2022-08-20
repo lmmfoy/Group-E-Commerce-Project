@@ -5,11 +5,19 @@ import styled from 'styled-components';
 import Homepage from './Homepage';
 import CategoryFeed from './CategoryFeed';
 
+import Cart from './Cart';
+import ItemCard from './ItemCard';
+import ProductPage from './ProductPage';
+import Header from "./Header";
+import ItemPage from './ItemPage';
+
+
 const App = () => {
+  const [loading, setLoading] = useState(false)
   return (
     <BrowserRouter>
       {/* <GlobalStyles /> */}
-      {/* <Header/> */}
+      <Header/>
       <AppContainer>
         <Routes>
           <Route
@@ -18,11 +26,11 @@ const App = () => {
           <Route
             path="/products/:category" element={<CategoryFeed/>}
           />
-          <Route
-            path="/product"
-          />
+          <Route path="products" element={<ProductPage setLoading={setLoading} loading ={loading}/>}/>
+          <Route path="/products/:_id" element={<ItemPage/>}/>
           <Route
             path="/cart"
+            element={<Cart />}
           />
           <Route path="" element={<h1>404: Oops!</h1>} />
         </Routes>
