@@ -63,7 +63,12 @@ const ItemPage = () => {
               Quantity remaining: <span>{product.numInStock}</span>
             </p>
           </div>
-          <Button onClick={addToCartHandleClick}>Add to cart</Button>
+          {/* Check if there is stock, if not don't allow user to click button */}
+          {product.numInStock > 0 ? (
+            <Button onClick={addToCartHandleClick}>Add to cart</Button>
+          ) : (
+            <Button>Out of stock</Button>
+          )}
         </>
       )}
     </Wrapper>
