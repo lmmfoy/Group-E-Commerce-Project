@@ -7,6 +7,7 @@ const {
   getAllItems,
   getSingleItem,
   updateItem,
+  getCategoryItems,
   postPurchasedItem,
   deleteCart,
 } = require("./handlers.js");
@@ -35,6 +36,7 @@ express()
   .get("/products", getAllItems)
   .get("/products/:_id", getSingleItem)
   .patch("/products/:_id", updateItem)
+  .get("products/categories/:_category", getCategoryItems)
   // .post("/cart", postPurchasedItem) //stretch
   // .delete("/cart", deleteCart) //stretch
 

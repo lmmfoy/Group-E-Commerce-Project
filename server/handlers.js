@@ -46,9 +46,9 @@ const getSingleItem = async (req, res) => {
 const updateItem = async (req, res) => {
   const _id = parseInt(req.params._id);
   const newNumInStock = req.body;
-  console.log(_id)
+  console.log(_id);
 
-  console.log(newNumInStock)
+  console.log(newNumInStock);
 
   try {
     await client.connect();
@@ -61,6 +61,23 @@ const updateItem = async (req, res) => {
     res.status(200).json({ status: 200, data: result });
   } catch (err) {
     res.status(404).json({ status: 404, data: err.message });
+  }
+};
+
+// Get all items in specific category
+const getCategoryItems = async (req, res) => {
+  const category = req.params.category;
+
+  try {
+    await client.connect();
+    const db = client.db();
+
+    const categoryItems = db.student.find({ category: category });
+    console.log(categoryItems)
+
+    res.status(200).json({ status: 200, data: categoryItems });
+  } catch (err) {
+    res.status(404).json({ status: 404, data: err });
   }
 };
 
@@ -92,6 +109,7 @@ module.exports = {
   getAllItems,
   getSingleItem,
   updateItem,
+  getCategoryItems,
   postPurchasedItem,
   deleteCart,
 };
