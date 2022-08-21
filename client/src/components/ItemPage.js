@@ -8,6 +8,9 @@ const ItemPage = () => {
   const [product, setProduct] = useState(null);
   //loading state that will change to true when the data is fetched from the backend, can add loading image while req is pending
   const [loading, setLoading] = useState(false);
+
+  const [stock, setStock] = useState(0)
+  
   //used to navigate away from this page to the /cart page
   let navigate = useNavigate();
   //pulls the id from the URL to find the appropriate item
@@ -15,6 +18,7 @@ const ItemPage = () => {
   //fetch that will call the .get function in the backend to retrieve the getSingleItem handler
   useEffect(() => {
     fetch(`/products/${_id}`)
+
       .then((res) => res.json())
       .then((data) => {
         setProduct(data.data);
@@ -60,7 +64,7 @@ const ItemPage = () => {
           <div>
             <p>{product.price}</p>
             <p>
-              Quantity remaining: <span>{product.numInStock}</span>
+              Quantity remaining: <span>{product.numInStock.numInStock}</span>
             </p>
           </div>
           {/* Check if there is stock, if not don't allow user to click button */}
