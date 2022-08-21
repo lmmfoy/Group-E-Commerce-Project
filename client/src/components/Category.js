@@ -15,7 +15,7 @@ import { ItemsContext } from "./ItemsContext";
 
 const Category = () => {
     const navigate = useNavigate();
-    const [category, setCategory] = useState(["Fitness", "Medical", "Lifestyle", "Entertainment", "Industrial", "Pets and Animals"]);
+    const [category, setCategory] = useState(["Fitness", "Medical", "Lifestyle", "Entertainment", "Industrial", "Pets"]);
     const { setSelectedCategory} = useContext(ItemsContext);
     const handleSelectedCategory = (category) => {
         setSelectedCategory(category);
@@ -63,7 +63,7 @@ const Category = () => {
                                                             )
                                                         }
                                                         {
-                                                            item==="Pets and Animals" && (
+                                                            item==="Pets" && (
                                                                 <img src={img6}width = "300px"/>
                                                             )
                                                         }
