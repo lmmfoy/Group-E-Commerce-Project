@@ -29,7 +29,7 @@ const Cart = () => {
     e.preventDefault();
 
     const finalCart = JSON.parse(sessionStorage.getItem("cart"));
-  
+
     // For each item in the final cart, update the number of items in stock in the "products" database
     Object.values(finalCart).forEach((item) => {
       const newNumInStock = item.numInStock - item.quantity;
@@ -45,7 +45,11 @@ const Cart = () => {
         },
       })
         .then((res) => res.json())
-        .then((json) => console.json);
+        .then((json) => {
+          if (json.status === 200) {
+            sessionStorage.clear();
+          }
+        });
     });
   };
 
