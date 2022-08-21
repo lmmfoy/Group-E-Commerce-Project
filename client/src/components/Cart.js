@@ -1,8 +1,7 @@
-import { useEffect, useState, useLocation, useRef } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Cart = () => {
-  // const location = useLocation();
   const [cartState, setCartState] = useState(null);
 
   let cart;
@@ -55,15 +54,21 @@ const Cart = () => {
 
   return (
     <StyledCart>
+      <div class="titles">
+        <div class="product">Product</div>
+        <div class="price">Price</div>
+        <div class="quantity">Quantity</div>
+        <div class="subtotal">Subtotal</div>
+      </div>
       <div>
         {Object.values(cart).map((item) => {
           // Get just the price, without the dollar sign
           const itemPrice = item.price.slice(1);
           return (
             <div class="cart-item">
-              <span>{item.name}</span>
-              <span>{itemPrice}</span>
-              <span>
+              <div class="item-name">{item.name}</div>
+              <div class="item-price">{itemPrice}</div>
+              <div class="item-quantity">
                 <input
                   id={item._id}
                   type="number"
@@ -78,14 +83,16 @@ const Cart = () => {
                     setCartState(cart);
                   }}
                 />{" "}
-              </span>
-              <span>{(itemPrice * item.quantity).toFixed(2)}</span>
+              </div>
+              <div class="item-subtotal">
+                {(itemPrice * item.quantity).toFixed(2)}
+              </div>
             </div>
           );
         })}
       </div>
-      <div>{total.toFixed(2)}</div>
-      <div>
+      <div class="total">Total: {total.toFixed(2)}</div>
+      <div class="order-button">
         <input
           type="button"
           value="Place your order"
@@ -97,11 +104,57 @@ const Cart = () => {
 };
 
 const StyledCart = styled.form`
-  .cart-item {
-    padding: 20px;
+  margin-top: 80px;
 
-    span {
-      padding: 20px;
+  .titles,
+  .cart-item,
+  .total,
+  .order-button {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  .titles, .cart-item {
+    border-bottom: 1px solid;
+    display: flex;
+    height: 50px;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+    .item-name, .product {
+      width: 800px;
+    }
+
+    .item-price, .price,
+    .item-quantity, .quantity,
+    .item-subtotal, .subtotal {
+      width: 100px;
+    }
+
+    .item-quantity input {
+      width: 40px;
+    }
+
+
+  .product, .price, .quantity, .subtotal {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+
+  .total {
+    text-align: right;
+    font-size: 1.3em;
+    padding: 40px 40px 20px 0;
+  }
+
+  .order-button {
+    text-align: right;
+    padding-right: 40px;
+
+    input {
+      font-size: 1.4em;
     }
   }
 `;
