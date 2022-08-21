@@ -5,18 +5,17 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 const ItemCard = (props) => {
   const product = props.product
-  console.log(props)
   return (
     <Wrapper>
     {/* Conditional rendering below */}
     {(props.loading) &&
       <>
       <NavigationLink to={`/products/${product._id}`}>
-      <img alt="base64 encoded URL of product" src={product.imageSrc}/>
-      <div>
-        <p>{product.name}</p>
+      <StyledImg alt="base64 encoded URL of product" src={product.imageSrc}/>
+      <StyledInfo>
+        <p className="name">{product.name}</p>
         <p>{product.price}</p>
-      </div>
+      </StyledInfo>
       </NavigationLink>
       
       </>}
@@ -28,19 +27,40 @@ const ItemCard = (props) => {
 
 export default ItemCard;
 
+const StyledInfo = styled.div`
+display:flex;
+flex-direction: column;
+align-items: center;
+
+.name{
+  min-height: 80px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+`
+
+const StyledImg = styled.img`
+max-height:100px;
+margin: 10px 0 0 0;
+`
+
 const NavigationLink = styled(NavLink)`
 text-decoration: none;
 color:black;
 display:flex;
 flex-direction: column;
 align-items: center;
+justify-content: space-between;
 `
 
 const Wrapper = styled.div`
 //CSS styling to be added
 width:200px;
-border:1px lightgray solid;
-padding: 5px;
+border:1px lightblue dashed;
+padding: 10px;
 
 //bolding the quantity of the stock. can be removed 
 span {
