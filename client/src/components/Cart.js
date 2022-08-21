@@ -92,13 +92,20 @@ const Cart = () => {
         })}
       </div>
       <div class="total">Total: ${total.toFixed(2)}</div>
-      <div class="order-button">
-        <input
-          type="button"
-          value="Place your order"
-          onClick={handlePlaceOrder}
-        />
-      </div>
+      {/* Can only click order button if there is a product in the cart */}
+      {total ? (
+        <div class="order-button">
+          <input
+            type="button"
+            value="Place your order"
+            onClick={handlePlaceOrder}
+          />
+        </div>
+      ) : (
+        <div class="order-button">
+          <input type="button" value="Place your order" />
+        </div>
+      )}
     </StyledCart>
   );
 };
@@ -114,7 +121,8 @@ const StyledCart = styled.form`
     margin: 0 auto;
   }
 
-  .titles, .cart-item {
+  .titles,
+  .cart-item {
     border-bottom: 1px solid;
     display: flex;
     height: 50px;
@@ -123,22 +131,28 @@ const StyledCart = styled.form`
     justify-content: space-between;
   }
 
-    .item-name, .product {
-      width: 800px;
-    }
+  .item-name,
+  .product {
+    width: 800px;
+  }
 
-    .item-price, .price,
-    .item-quantity, .quantity,
-    .item-subtotal, .subtotal {
-      width: 100px;
-    }
+  .item-price,
+  .price,
+  .item-quantity,
+  .quantity,
+  .item-subtotal,
+  .subtotal {
+    width: 100px;
+  }
 
-    .item-quantity input {
-      width: 40px;
-    }
+  .item-quantity input {
+    width: 40px;
+  }
 
-
-  .product, .price, .quantity, .subtotal {
+  .product,
+  .price,
+  .quantity,
+  .subtotal {
     font-size: 1.1em;
     font-weight: 600;
   }
@@ -152,11 +166,10 @@ const StyledCart = styled.form`
   .order-button {
     text-align: right;
     padding-right: 35px;
-    
 
     input {
       font-size: 1.4em;
-      background-color: #DCDCDC;
+      background-color: #dcdcdc;
       padding: 10px;
       border-radius: 5px;
       border: none;
