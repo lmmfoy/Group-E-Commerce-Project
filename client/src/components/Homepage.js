@@ -56,6 +56,7 @@ const Homepage =() =>{
 
 const Container = styled.div`
 background-color: #FEFBF6;
+position:relative;
 
 `
 
