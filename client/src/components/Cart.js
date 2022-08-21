@@ -1,72 +1,102 @@
-import { useEffect, useState, useLocation } from "react";
+import { useEffect, useState, useLocation, useRef } from "react";
 import styled from "styled-components";
 
 const Cart = () => {
-  const location = useLocation().state;
-  const [cartItems, setCartItems] = useState([]);
-  const [cartTotal, setCartTotal] = useState(0);
+  // const location = useLocation();
+  const [cartState, setCartState] = useState(null);
 
-  useEffect(() => {
-    fetch(`/products/${location._id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { _id, name, price } = data.data;
+  let cart;
+  let total = 0;
 
-        // Check to see if there are already items in the cartItems array
-        if (cartItems.length !== 0) {
-          let previouslyAddedItem = false;
-          // Map through the array, and if there is an item already in it that has the id of the item being added, increase the count
-          const newCartItemsArray = cartItems.map((item) => {
-            if (item._id === _id) {
-              previouslyAddedItem = true;
-              const newCount = item.count + 1;
-              const newItem = { ...item, count: newCount };
-              return newItem;
-            }
-            return item;
-          });
+  // Checks sessionStorage to see if there are already items in the cart, if not assigns cart variable empty object
+  if (sessionStorage.getItem("cart")) {
+    cart = JSON.parse(sessionStorage.getItem("cart"));
+  } else {
+    cart = {};
+  }
 
-          // If the item has never been added before, add to cartItems
-          if (previouslyAddedItem === false) {
-            setCartItems((prev) => [
-              ...prev,
-              { _id: _id, name: name, price: price, count: 1 },
-            ]);
-          } else {
-            // Update the cartItems array to the new array created by cartItems.map
-            setCartItems(newCartItemsArray);
+  // Calculate total
+  Object.values(cart).map((item) => {
+    const itemPrice = item.price.slice(1);
+    const subTotal = (itemPrice * item.quantity).toFixed(2);
+    total += parseFloat(subTotal);
+  });
+
+  // This is to get the page to rerender when someone increases or decreases the number of items they want - probably something should actually happen in it
+  useEffect(() => {}, [cartState]);
+
+  const handlePlaceOrder = (e) => {
+    e.preventDefault();
+
+    const finalCart = JSON.parse(sessionStorage.getItem("cart"));
+
+    // For each item in the final cart, update the number of items in stock in the "products" database
+    Object.values(finalCart).forEach((item) => {
+      const newNumInStock = item.numInStock - item.quantity;
+
+      fetch(`/products/${item._id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          numInStock: newNumInStock,
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.status === 200) {
+            sessionStorage.clear();
           }
-        } else {
-          // Add the first item to the cartItems array
-          setCartItems([{ _id: _id, name: name, price: price, count: 1 }]);
-        }
-      });
-  }, []);
-
-  console.log(cartItems);
-
+        });
+    });
+  };
 
   return (
     <StyledCart>
-      <>
-        {cartItems.map((item) => {
+      <div>
+        {Object.values(cart).map((item) => {
           // Get just the price, without the dollar sign
-          console.log(item);
           const itemPrice = item.price.slice(1);
           return (
             <div class="cart-item">
               <span>{item.name}</span>
-              <span>{Math.round((itemPrice * item.count) * 100)/100}</span> 
-              <span>{item.count}</span>
+              <span>{itemPrice}</span>
+              <span>
+                <input
+                  id={item._id}
+                  type="number"
+                  value={item.quantity}
+                  min="0"
+                  max={item.numInStock}
+                  // When number changed, cart updated in sessionStorage and added to cartState to prompt useEffect to rerender page
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    cart[item._id] = { ...item, quantity: value };
+                    sessionStorage.setItem("cart", JSON.stringify(cart));
+                    setCartState(cart);
+                  }}
+                />{" "}
+              </span>
+              <span>{(itemPrice * item.quantity).toFixed(2)}</span>
             </div>
           );
         })}
-      </>
+      </div>
+      <div>{total.toFixed(2)}</div>
+      <div>
+        <input
+          type="button"
+          value="Place your order"
+          onClick={handlePlaceOrder}
+        />
+      </div>
     </StyledCart>
   );
 };
 
-const StyledCart = styled.div`
+const StyledCart = styled.form`
   .cart-item {
     padding: 20px;
 

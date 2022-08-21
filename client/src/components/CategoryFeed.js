@@ -7,7 +7,7 @@ const CategoryFeed = () =>{
     const{category} = useParams();
     const [items, setItems] = useState(null);
     useEffect(()=>{
-        fetch(`/products/${category}`)
+        fetch(`/products/categories/${category}`)
         .then(res=>res.json())
         .then(data=>{
             // console.log(data)
