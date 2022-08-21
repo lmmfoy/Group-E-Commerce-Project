@@ -55,10 +55,10 @@ const Cart = () => {
   return (
     <StyledCart>
       <div class="titles">
-        <div class="product">Product</div>
-        <div class="price">Price</div>
-        <div class="quantity">Quantity</div>
-        <div class="subtotal">Subtotal</div>
+        <div class="product-title">Product</div>
+        <div class="short-title">Price</div>
+        <div class="short-title">Quantity</div>
+        <div class="short-title">Subtotal</div>
       </div>
       <div>
         {Object.values(cart).map((item) => {
@@ -66,7 +66,9 @@ const Cart = () => {
           const itemPrice = item.price.slice(1);
           return (
             <div class="cart-item">
-              <div class="item-name">{item.name}</div>
+              <a href={`/products/${item._id}`} class="item-name">
+                {item.name}
+              </a>
               <div class="item-price">${itemPrice}</div>
               <div class="item-quantity">
                 <input
@@ -117,13 +119,13 @@ const StyledCart = styled.form`
   .cart-item,
   .total,
   .order-button {
-    max-width: 1500px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
   .titles,
   .cart-item {
-    border-bottom: 1px solid;
+    border-bottom: 2px solid #dcdcdc;
     display: flex;
     height: 50px;
     padding: 20px;
@@ -131,17 +133,23 @@ const StyledCart = styled.form`
     justify-content: space-between;
   }
 
+  .titles {
+    border-bottom: 4px solid #dcdcdc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+
   .item-name,
-  .product {
+  .product-title {
     width: 800px;
   }
 
   .item-price,
-  .price,
+  .short-title,
   .item-quantity,
-  .quantity,
+  .short-title,
   .item-subtotal,
-  .subtotal {
+  .short-title {
     width: 100px;
   }
 
@@ -149,12 +157,21 @@ const StyledCart = styled.form`
     width: 40px;
   }
 
-  .product,
+  .product-title,
   .price,
   .quantity,
   .subtotal {
     font-size: 1.1em;
     font-weight: 600;
+  }
+
+  .item-name {
+    text-decoration: none;
+    color: black;
+  }
+
+  .item-name:hover {
+    color: #0099cc;
   }
 
   .total {
@@ -181,7 +198,7 @@ const StyledCart = styled.form`
     }
 
     input:active {
-      transform: scale(.9);
+      transform: scale(0.9);
     }
   }
 `;
