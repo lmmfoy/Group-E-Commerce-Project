@@ -64,7 +64,7 @@ const ItemPage = () => {
           <div>
             <p>{product.price}</p>
             <p>
-              Quantity remaining: <span>{product.numInStock.numInStock}</span>
+              Quantity remaining: <span>{product.numInStock}</span>
             </p>
           </div>
           {/* Check if there is stock, if not don't allow user to click button */}
