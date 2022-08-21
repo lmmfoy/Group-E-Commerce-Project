@@ -179,6 +179,10 @@ const StyledCart = styled.form`
       background-color: #0099cc;
       color: white;
     }
+
+    input:active {
+      transform: scale(.9);
+    }
   }
 `;
 
