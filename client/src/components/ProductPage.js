@@ -17,7 +17,6 @@ const ProductPage = (props) =>{
       props.setLoading(true)
     })
   }, [])
-  console.log(props.loading)
   return (
     <Wrapper>
     {loading && props.loading && allProducts.map((product) => {
