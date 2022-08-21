@@ -15,7 +15,7 @@ const Cart = () => {
   }
 
   // Calculate total
-  Object.values(cart).map((item) => {
+  Object.values(cart).forEach((item) => {
     const itemPrice = item.price.slice(1);
     const subTotal = (itemPrice * item.quantity).toFixed(2);
     total += parseFloat(subTotal);
@@ -67,7 +67,7 @@ const Cart = () => {
           return (
             <div class="cart-item">
               <div class="item-name">{item.name}</div>
-              <div class="item-price">{itemPrice}</div>
+              <div class="item-price">${itemPrice}</div>
               <div class="item-quantity">
                 <input
                   id={item._id}
@@ -85,13 +85,13 @@ const Cart = () => {
                 />{" "}
               </div>
               <div class="item-subtotal">
-                {(itemPrice * item.quantity).toFixed(2)}
+                ${(itemPrice * item.quantity).toFixed(2)}
               </div>
             </div>
           );
         })}
       </div>
-      <div class="total">Total: {total.toFixed(2)}</div>
+      <div class="total">Total: ${total.toFixed(2)}</div>
       <div class="order-button">
         <input
           type="button"
@@ -146,15 +146,25 @@ const StyledCart = styled.form`
   .total {
     text-align: right;
     font-size: 1.3em;
-    padding: 40px 40px 20px 0;
+    padding: 40px 40px 30px 0;
   }
 
   .order-button {
     text-align: right;
-    padding-right: 40px;
+    padding-right: 35px;
+    
 
     input {
       font-size: 1.4em;
+      background-color: #DCDCDC;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    input:hover {
+      background-color: #0099cc;
+      color: white;
     }
   }
 `;
