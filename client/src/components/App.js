@@ -4,14 +4,13 @@ import GlobalStyles from "./GlobalStyles";
 import styled from 'styled-components';
 import Homepage from './Homepage';
 import CategoryFeed from './CategoryFeed';
-
+import Footer from "./Footer";
 import Cart from './Cart';
 import ItemCard from './ItemCard';
 import ProductPage from './ProductPage';
 import Header from "./Header";
 import ItemPage from './ItemPage';
 import ConfirmationPage from './ConfirmationPage';
-
 
 const App = () => {
   const [loading, setLoading] = useState(false)
@@ -25,7 +24,7 @@ const App = () => {
             path="/" element={<Homepage/>}
           />
           <Route
-            path="/products/categories/:category" element={<CategoryFeed/>}
+            path="/products/categories/:_category" element={<CategoryFeed  setLoading={setLoading} loading ={loading}/>}
           />
           <Route path="products" element={<ProductPage setLoading={setLoading} loading ={loading}/>}/>
           <Route path="/products/:_id" element={<ItemPage/>}/>
