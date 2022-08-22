@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import SelectOption from "./SelectOption";
 
 const Cart = () => {
   const [cartState, setCartState] = useState(null);
-  const [value, setValue] = useState(null); //state array for x items
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   let cart;
   let total = 0;
@@ -25,19 +23,6 @@ const Cart = () => {
     total += parseFloat(subTotal);
   });
 
-  //select option function that renders based on number of items
-  const selectOption = (value) =>{
-    let itemQuantityArray = [];
-    for(let i = 0; i< value; i++){
-    itemQuantityArray.push( 
-      {value: i, label: i}
-    )
-  }
-  return itemQuantityArray;
-  }
-
-
-
   // This is to get the page to rerender when someone increases or decreases the number of items they want - probably something should actually happen in it
   //Can make the item disappear if the quantity is set to zero by the user, or alternatively create a delete button - stretch
   useEffect(() => {}, [cartState]);
@@ -49,13 +34,9 @@ const Cart = () => {
 
     // For each item in the final cart, update the number of items in stock in the "products" database
     Object.values(finalCart).forEach((item) => {
-      // if(item.quantity > item.numInstock){
-      //   window.alert('You have selected an invalid quantity for the following item(s):');
-      // }
-      // else {
-        const newNumInStock = item.numInStock - item.quantity;
+      const newNumInStock = item.numInStock - item.quantity;
 
-        fetch(`/products/${item._id}`, {
+      fetch(`/products/${item._id}`, {
         method: "PATCH",
         body: JSON.stringify({
           numInStock: newNumInStock,
@@ -71,83 +52,72 @@ const Cart = () => {
             sessionStorage.clear();
           }
         });
-        navigate("/cart/confirmed");
+      navigate("/cart/confirmed");
       // }
-      });
-    };
+    });
+  };
 
   return (
     <StyledCart>
-    <form>
-      <div class="titles">
-        <div class="product-title">Product</div>
-        <div class="short-title">Price</div>
-        <div class="short-title">Quantity</div>
-        <div class="short-title">Subtotal</div>
-      </div>
-      <div>
-        {Object.values(cart).map((item, index) => {
-          // Get just the price, without the dollar sign
-          const itemPrice = item.price.slice(1);
-          //creates an array the size of the number of items available for purchase
-          const arrayLength = item.numInStock;
-          let purchaseLimit = new Array(arrayLength);
-          //fills the array with 0 - number of items in stock
-          let count = 0;
-          while(count < item.numInStock+1){
-            purchaseLimit.push(count);
-            count++;
-          }
-          //* const itemQuantity = item.numInStock; */
-          return (
-            <div class="cart-item">
-              <a href={`/products/${item._id}`} class="item-name">
-                {item.name}
-              </a>
-              <div class="item-price">${itemPrice}</div>
-              <div class="item-quantity">
-              <select
-              onChange={(e) =>{
-                const value = parseInt(e.target.value);
-                    cart[item._id] = { ...item, quantity: value };
-                    sessionStorage.setItem("cart", JSON.stringify(cart));
-                    setCartState(cart);
-                    count = item.quantity;
-              }}
-              >
-              {
-                purchaseLimit.map((value, index) =>{
-                  
-                  return (
-                <option value={value}>{value}</option>
-                  )
-                })
-              }
-              </select>
-                {" "}
-              </div>
-              <div class="item-subtotal">
-                ${(itemPrice * item.quantity).toFixed(2)}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      <div class="total">Total: ${total.toFixed(2)}</div>
-      {/* Can only click order button if there is a product in the cart */}
-      {total ? (
-        <div class="order-button">
-          <input
-            type="button"
-            value="Place your order"
-            onClick={handlePlaceOrder}
-          />
+      <form>
+        <div class="titles">
+          <div class="product-title">Product</div>
+          <div class="short-title">Price</div>
+          <div class="short-title">Quantity</div>
+          <div class="short-title">Subtotal</div>
         </div>
-      ) : (
-        <div class="order-button">
-          <input type="button" value="Place your order" />
+        <div>
+          {Object.values(cart).map((item) => {
+            // Get just the price, without the dollar sign
+            const itemPrice = item.price.slice(1);
+            // Create an array of numbers from 0 - item.numInStock
+            let inStockArray = [...Array(item.numInStock + 1).keys()];
+            return (
+              <div class="cart-item">
+                <a href={`/products/${item._id}`} class="item-name">
+                  {item.name}
+                </a>
+                <div class="item-price">${itemPrice}</div>
+                <div class="item-quantity">
+                  <select
+                    id={item._id}
+                    value={item.quantity}
+                    // When number changed, cart updated in sessionStorage and added to cartState to prompt useEffect to rerender page
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      cart[item._id] = { ...item, quantity: value };
+                      sessionStorage.setItem("cart", JSON.stringify(cart));
+                      setCartState(cart);
+                    }}
+                  >
+                    {/* Loop through the array of numbers to add correct quantity in dropdown */}
+                    {inStockArray.map((item) => {
+                      return <option value={item}>{item}</option>;
+                    })}
+                  </select>{" "}
+                </div>
+                <div class="item-subtotal">
+                  ${(itemPrice * item.quantity).toFixed(2)}
+                </div>
+              </div>
+            );
+          })}
         </div>
-      )}
+        <div class="total">Total: ${total.toFixed(2)}</div>
+        {/* Can only click order button if there is a product in the cart */}
+        {total ? (
+          <div class="order-button">
+            <input
+              type="button"
+              value="Place your order"
+              onClick={handlePlaceOrder}
+            />
+          </div>
+        ) : (
+          <div class="order-button">
+            <input type="button" value="Place your order" />
+          </div>
+        )}
       </form>
     </StyledCart>
   );
