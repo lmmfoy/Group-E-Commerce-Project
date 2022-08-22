@@ -1,5 +1,7 @@
 "use strict";
 
+const countryCodes = require("./data/countryCodes.json");
+
 const { MongoClient } = require("mongodb");
 
 require("dotenv").config();
@@ -95,7 +97,14 @@ const getCompanyInfo = async (req, res) => {
     const result = await db
       .collection("companies")
       .findOne({ _id: company_id });
-    console.log(result);
+
+    // Find the country code of the company's country to use in the frontend to add a flag
+    const countryCode = countryCodes.find(
+      (item) => item.name === result.country
+    ).code;
+    if (countryCode) {
+      result.countryCode = countryCode;
+    }
 
     res.status(200).json({ status: 200, data: result });
   } catch (err) {
