@@ -9,8 +9,8 @@ const ItemPage = () => {
   //loading state that will change to true when the data is fetched from the backend, can add loading image while req is pending
   const [loading, setLoading] = useState(false);
 
-  const [stock, setStock] = useState(0)
-  
+  const [stock, setStock] = useState(0);
+
   //used to navigate away from this page to the /cart page
   let navigate = useNavigate();
   //pulls the id from the URL to find the appropriate item
@@ -18,14 +18,11 @@ const ItemPage = () => {
   //fetch that will call the .get function in the backend to retrieve the getSingleItem handler
   useEffect(() => {
     fetch(`/products/${_id}`)
-
       .then((res) => res.json())
       .then((data) => {
         setProduct(data.data);
 
         setLoading(true); //loading state is now true, product state is updated with a single item
-        //navigate will be nested inside a button
-        // navigate('/cart', {state: { _id: _id}})
       });
   }, []);
 
@@ -59,20 +56,24 @@ const ItemPage = () => {
       {/* Conditional rendering below */}
       {loading && (
         <>
-          <h1>{product.name}</h1>
-          <img alt="base64 encoded URL of product" src={product.imageSrc} />
-          <div>
-            <p>{product.price}</p>
-            <p>
-              Quantity remaining: <span>{product.numInStock}</span>
-            </p>
+          <div class="product-image">
+            <img alt="base64 encoded URL of product" src={product.imageSrc} />
           </div>
-          {/* Check if there is stock, if not don't allow user to click button */}
-          {product.numInStock > 0 ? (
-            <Button onClick={addToCartHandleClick}>Add to cart</Button>
-          ) : (
-            <Button>Out of stock</Button>
-          )}
+          <div>
+            <h1>{product.name}</h1>
+            <div>
+              <p>{product.price}</p>
+              <p>
+                Quantity remaining: <span>{product.numInStock}</span>
+              </p>
+            </div>
+            {/* Check if there is stock, if not don't allow user to click button */}
+            {product.numInStock > 0 ? (
+              <Button onClick={addToCartHandleClick}>Add to cart</Button>
+            ) : (
+              <Button>Out of stock</Button>
+            )}
+          </div>
         </>
       )}
     </Wrapper>
@@ -82,7 +83,15 @@ const ItemPage = () => {
 export default ItemPage;
 
 const Wrapper = styled.div`
-  //CSS styling to be added
+  display: flex;
+  margin: 80px;
+  max-width: 900px;
+  justify-content: center;
+  gap: 50px;
+
+  img {
+    width: 250px;
+  }
 
   //bolding the quantity of the stock. can be removed
   span {
@@ -90,4 +99,19 @@ const Wrapper = styled.div`
   }
 `;
 
-const Button = styled.button``;
+const Button = styled.button`
+  font-size: 1.4em;
+  background-color: #dcdcdc;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+
+  &:hover {
+    background-color: #0099cc;
+    color: white;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+`;
