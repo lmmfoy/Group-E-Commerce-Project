@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { FiShoppingCart, FiHome } from "react-icons/fi";
-import logo from "../logo/logo.jpg";
+import logo from "../logo/logo.png";
 const Header = () => {
 
     return (
         <Wrapper>
             <div className="sticky">
             <Nav>
-                    <NavLink to="/"><StyledLogo src={logo}/></NavLink> 
+                    <StyledImageLink to="/">w<StyledLogo src={logo}/> tching</StyledImageLink> 
                     <StyledNavLink to="/products"> Products</StyledNavLink>
                     <StyledNavLink to="/cart">Cart</StyledNavLink>
 
@@ -18,21 +18,37 @@ const Header = () => {
     )
 };
 
-const StyledLogo = styled.img`
-height:40px;
+const StyledImageLink = styled(NavLink)`
+display:flex;
+text-decoration: none;
+color:black;
+align-items:center;
+font-size: 30px;
 border:3px white solid;
+gap:2px;
+top:3px;
+position:relative;
 &:hover {
     opacity: .5;
     border-radius: 8px;
     border:3px lavender solid;
 }
+
+`
+
+const StyledLogo = styled.img`
+height:50px;
+width:56px;
+
 `
 
 const Wrapper = styled.div`
 display:flex;
 flex-direction:column;
-/* justify-content:end; */
+justify-content:center;
+/* align-items: center; */
 height:60px;
+
 .sticky{
     position:sticky;
     top:0px;
@@ -52,8 +68,14 @@ gap:70px;
 const StyledNavLink = styled(NavLink)`
 color:black;
 text-decoration: none;
-padding: 12px 16px 8px;
+padding: 16px 16px 8px;
+
+top:3px;
 border: 3px white solid;
+position:relative;
+left: -30px;
+
+
 
 &:hover {
     background-color: lightgray;
