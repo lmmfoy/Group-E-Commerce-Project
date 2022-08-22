@@ -84,6 +84,25 @@ const getCategoryItems = async (req, res) => {
   }
 };
 
+// Get information about a product's company with company ID
+const getCompanyInfo = async (req, res) => {
+  const company_id = parseInt(req.params.company_id);
+
+  try {
+    await client.connect();
+    const db = client.db("EcommerceDatabse");
+
+    const result = await db
+      .collection("companies")
+      .findOne({ _id: company_id });
+    console.log(result);
+
+    res.status(200).json({ status: 200, data: result });
+  } catch (err) {
+    res.status(404).json({ status: 404, data: err });
+  }
+};
+
 // Possible To Do - Stretch
 const postPurchasedItem = async (req, res) => {
   try {
@@ -113,6 +132,7 @@ module.exports = {
   getSingleItem,
   updateItem,
   getCategoryItems,
+  getCompanyInfo,
   postPurchasedItem,
   deleteCart,
 };
