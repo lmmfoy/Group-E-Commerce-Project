@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import SelectOption from "./SelectOption";
+
 
 const Cart = () => {
   const [cartState, setCartState] = useState(null);
