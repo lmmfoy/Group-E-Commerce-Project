@@ -8,6 +8,8 @@ const ItemPage = () => {
   const [product, setProduct] = useState(null);
   //loading state that will change to true when the data is fetched from the backend, can add loading image while req is pending
   const [loading, setLoading] = useState(false);
+  //state to store company information
+  const [company, setCompany] = useState({});
 
   const [stock, setStock] = useState(0);
 
@@ -25,6 +27,18 @@ const ItemPage = () => {
         setLoading(true); //loading state is now true, product state is updated with a single item
       });
   }, []);
+
+  // Once the product has loaded, then fetch the company information
+  useEffect(() => {
+    if (product) {
+      fetch(`/products/company/${product.companyId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCompany(data.data);
+        });
+      console.log(company);
+    }
+  }, [product]);
 
   const addToCartHandleClick = () => {
     // This is for when "add to cart" button clicked
@@ -60,6 +74,7 @@ const ItemPage = () => {
             <img alt="base64 encoded URL of product" src={product.imageSrc} />
           </div>
           <div>
+            <a href={company.url}>{company.name}</a>
             <h1>{product.name}</h1>
             <div>
               <p>{product.price}</p>
