@@ -48,7 +48,6 @@ const CategoryFeed = (props) =>{
 }
 
 const ImageStyle = styled.div`
-
 width: 100%;
 height: 100vh;
 img{
@@ -74,24 +73,23 @@ img{
 }
 `
 const CategoryFeedBox = styled.div`
-
-display:flex;
-flex-wrap: wrap;
-position: absolute;
-    margin: 0px 320px;
+    display:flex;
+    flex-wrap: wrap;
+    position: absolute;
+    margin: 0px 400px;
 `;
 
 const ItemProfile = styled.div`
     display: flex;
-    background: #fafafa;
-box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
-gap: 20px;
+    background: white;
+    box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
+    gap: 20px;
     border-radius:20px;
     margin: 30px;
     border: none;
     font-size: 20px;
     image-resolution: unset;
-   
+
 :hover {
     box-shadow: 0 0 15px 1px #5BB318;
     opacity: 70%;
