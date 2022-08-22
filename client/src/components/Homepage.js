@@ -21,7 +21,7 @@ const Homepage =() =>{
                     <p>Discover the broad selection of watches to find a perfect combination of style and functionality.</p>
                     </TextBox>
                     <TextBoxTwo>
-                    <h1>Category</h1>
+                    <h2>Category</h2>
                     </TextBoxTwo>
                     
                 <ImageBox>
@@ -55,11 +55,8 @@ const Homepage =() =>{
 };
 
 const Container = styled.div`
-background-color: #FEFBF6;
 position:relative;
-
 `
-
 const FactsStyle = styled.div`
 display: flex;
 justify-content: space-around;
@@ -78,16 +75,12 @@ img{
 const ImageBox = styled.div`
 margin-top: 30px;
 background-size:cover;
-
 `
 const TextBox = styled.div`
 margin-top:-200px;
 display: flex;
 flex-direction: column;
 align-items: center;
-h1{
-    font-size: 35px;
-}
 p{
     font-size: 20px;
 }
@@ -120,7 +113,6 @@ img:hover {
 `
 
 const Visual = styled.div`
-
 .text{
     color: #fff;
     transition: .2s ease;

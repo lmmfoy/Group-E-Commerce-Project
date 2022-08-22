@@ -37,9 +37,7 @@ const CategoryFeed = () =>{
                 )
             })
         }
-        </>
-       
-        
+        </>      
     )
 }
 

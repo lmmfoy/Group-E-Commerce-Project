@@ -9,7 +9,6 @@ import img4 from "../media/img4.jpg";
 import img5 from "../media/img5.jpg";
 import img6 from "../media/img6.jpg";
 import img7 from "../media/img7.jpg";
- 
 import { ItemsContext } from "./ItemsContext";
 
 
@@ -30,7 +29,7 @@ const Category = () => {
                             <img className="Img" src={img7}width = "1000px"/>
                             </Visual>
                             <Content>
-                                <h2>Category</h2>
+                                <h1>Category</h1>
                                 <ItemsCategory>
                                     {
                                         category.map((item)=>{
@@ -91,16 +90,11 @@ display: flex;
     align-items: flex-end;
 }
 
-h2{
-    font-size: 40px;
-    color: white;
-}
+
 `
 const Box = styled.div`
 display: flex;
 max-width: max-content;
-
-
 `
 
 const TopCategoryInner = styled.div`
