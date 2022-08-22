@@ -5,12 +5,16 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 const ItemCard = (props) => {
   const product = props.product
+  const handleClick = () => {
+    window.open(`/products/${product._id}`)
+  }
+
   return (
-    <Wrapper>
+    <Wrapper outOfStock={product.numInStock} >
     {/* Conditional rendering below */}
     {(props.loading) &&
       <>
-      <NavigationLink to={`/products/${product._id}`}>
+      <NavigationLink onClick={handleClick}>
       <StyledImg alt="base64 encoded URL of product" src={product.imageSrc}/>
       <StyledInfo>
         <p className="name">{product.name}</p>
@@ -48,13 +52,16 @@ max-height:200px;
 margin: 30px 0 0 0;
 `
 
-const NavigationLink = styled(NavLink)`
+const NavigationLink = styled.button`
 text-decoration: none;
 color:black;
 display:flex;
 flex-direction: column;
 align-items: center;
 justify-content: space-between;
+border:none;
+background-color: var(--primary-color);
+
 `
 
 const Wrapper = styled.div`
@@ -62,10 +69,8 @@ const Wrapper = styled.div`
 width:200px;
 padding: 10px;
 
-//bolding the quantity of the stock. can be removed 
-span {
-  font-weight: bold;
-}
+opacity: ${(props) => (props.outOfStock === 0 ? "60%" : "1")}
+
 `
 
 const Button = styled.button`

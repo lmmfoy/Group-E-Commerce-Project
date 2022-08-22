@@ -24,7 +24,7 @@ text-decoration: none;
 color:black;
 align-items:center;
 font-size: 30px;
-border:3px white solid;
+border:3px var(--primary-color) solid;
 gap:2px;
 top:3px;
 position:relative;
@@ -61,7 +61,6 @@ const Nav = styled.div`
 padding:0px 80px 16px 0;
 display:flex;
 justify-content: space-around;
-/* border-bottom: 1px black solid; */
 gap:70px;
 
 `
@@ -71,7 +70,7 @@ text-decoration: none;
 padding: 16px 16px 8px;
 
 top:3px;
-border: 3px white solid;
+border: 3px var(--primary-color) solid;
 position:relative;
 left: -30px;
 
