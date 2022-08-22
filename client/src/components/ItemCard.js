@@ -36,6 +36,7 @@ align-items: center;
   min-height: 80px;
   text-align: center;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 
@@ -43,8 +44,8 @@ align-items: center;
 `
 
 const StyledImg = styled.img`
-max-height:100px;
-margin: 10px 0 0 0;
+max-height:200px;
+margin: 30px 0 0 0;
 `
 
 const NavigationLink = styled(NavLink)`
@@ -59,7 +60,6 @@ justify-content: space-between;
 const Wrapper = styled.div`
 //CSS styling to be added
 width:200px;
-border:1px lightblue dashed;
 padding: 10px;
 
 //bolding the quantity of the stock. can be removed 
