@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cartState, setCartState] = useState(null);
+  const navigate = useNavigate()
 
   let cart;
   let total = 0;
@@ -49,6 +51,7 @@ const Cart = () => {
             sessionStorage.clear();
           }
         });
+        navigate("/cart/confirmed");
     });
   };
 
