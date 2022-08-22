@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { FiShoppingCart, FiHome } from "react-icons/fi";
-
+import logo from "../logo/logo.jpg";
 const Header = () => {
 
     return (
         <Wrapper>
             <div className="sticky">
             <Nav>
-                    <StyledNavLink to="/">Home</StyledNavLink> 
+                    <NavLink to="/"><StyledLogo src={logo}/></NavLink> 
                     <StyledNavLink to="/products"> Products</StyledNavLink>
                     <StyledNavLink to="/cart">Cart</StyledNavLink>
 
@@ -18,15 +18,21 @@ const Header = () => {
     )
 };
 
-const Logo = styled.img`
-
+const StyledLogo = styled.img`
+height:40px;
+border:3px white solid;
+&:hover {
+    opacity: .5;
+    border-radius: 8px;
+    border:3px lavender solid;
+}
 `
 
 const Wrapper = styled.div`
 display:flex;
 flex-direction:column;
 /* justify-content:end; */
-height:50px;
+height:60px;
 .sticky{
     position:sticky;
     top:0px;
@@ -46,7 +52,7 @@ gap:70px;
 const StyledNavLink = styled(NavLink)`
 color:black;
 text-decoration: none;
-padding: 8px 16px 8px;
+padding: 12px 16px 8px;
 border: 3px white solid;
 
 &:hover {

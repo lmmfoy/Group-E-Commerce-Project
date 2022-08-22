@@ -10,6 +10,7 @@ import ItemCard from './ItemCard';
 import ProductPage from './ProductPage';
 import Header from "./Header";
 import ItemPage from './ItemPage';
+import ConfirmationPage from './ConfirmationPage';
 
 
 const App = () => {
@@ -32,6 +33,10 @@ const App = () => {
             path="/cart"
             element={<Cart />}
           />
+          <Route
+            path="cart/confirmed"
+            element={<ConfirmationPage/>}
+            />
           <Route path="" element={<h1>404: Oops!</h1>} />
         </Routes>
         {/* <Footer /> */}
