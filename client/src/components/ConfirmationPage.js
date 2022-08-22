@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../logo/logo.jpg";
+import logo from "../logo/logo.png";
 
 const ConfirmationPage = () => {
     //this function makes the button navigate back to the products page
