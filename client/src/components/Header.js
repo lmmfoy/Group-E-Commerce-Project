@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
-// import { FiShoppingCart, FiHome } from "react-icons/fi";
+import { FiShoppingCart, FiHome } from "react-icons/fi";
 import logo from "../logo/logo.jpg";
 const Header = () => {
 
