@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import ReactCountryFlag from "react-country-flag";
 
 const ItemPage = () => {
   //state that will store the product object
@@ -36,7 +37,6 @@ const ItemPage = () => {
         .then((data) => {
           setCompany(data.data);
         });
-      console.log(company);
     }
   }, [product]);
 
@@ -74,7 +74,14 @@ const ItemPage = () => {
             <img alt="base64 encoded URL of product" src={product.imageSrc} />
           </div>
           <div>
-            <a href={company.url}>{company.name}</a>
+            <a href={company.url} class="company-name">
+              {company.name}
+              {/* Add company country flag */}
+              <ReactCountryFlag
+                class="flag"
+                countryCode={`${company.countryCode}`}
+              />
+            </a>
             <h1>{product.name}</h1>
             <div>
               <p>{product.price}</p>
@@ -106,6 +113,16 @@ const Wrapper = styled.div`
 
   img {
     width: 250px;
+  }
+
+  .company-name {
+    font-size: 1.2em;
+    text-decoration: none;
+  }
+
+  .flag {
+    padding-left: 5px;
+    font-size: 100px;
   }
 
   //bolding the quantity of the stock. can be removed
