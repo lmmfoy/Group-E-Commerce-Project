@@ -86,11 +86,11 @@ const Cart = () => {
                 // sessionStorage.removeItem("cart", )
                 let tempItem = JSON.parse(sessionStorage.getItem('cart'));
                 
-                console.log(tempItem[item._id]);
-                tempItem[item._id] = null;
-                sessionStorage.setItem('cart', JSON.stringify(cart))
+                console.log(tempItem);
+                delete tempItem[item._id];
+                sessionStorage.setItem('cart', JSON.stringify(tempItem))
                 // sessionStorage.removeItem()
-                setCartState(cart);
+                setCartState(tempItem);
                 e.preventDefault();
               }
                 
