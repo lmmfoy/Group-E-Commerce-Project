@@ -27,7 +27,11 @@ const Cart = () => {
   // This is to get the page to rerender when someone increases or decreases the number of items they want - probably something should actually happen in it
   //Can make the item disappear if the quantity is set to zero by the user, or alternatively create a delete button - stretch
   useEffect(() => {}, [cartState]);
+  //function that listens to the X button, which will remove an item from the cart
+  const handleRemove = (e) =>{
+  e.preventDefault();
 
+  }
   const handlePlaceOrder = (e) => {
     e.preventDefault();
 
@@ -73,8 +77,24 @@ const Cart = () => {
             const itemPrice = item.price.slice(1);
             // Create an array of numbers from 0 - item.numInStock
             let inStockArray = [...Array(item.numInStock + 1).keys()];
+            //slice the array to remove the option of picking zero
+            let slicedStockArray = inStockArray.slice(1);
             return (
               <div class="cart-item">
+              <button className="btn-remove" onClick={(e) =>{
+                //set quantity value to 0
+                // sessionStorage.removeItem("cart", )
+                let tempItem = JSON.parse(sessionStorage.getItem('cart'));
+                
+                // console.log(tempItem[item._id]);
+                tempItem[item._id] = null;
+                sessionStorage.setItem('cart', JSON.stringify(cart))
+                // sessionStorage.removeItem()
+                setCartState(cart);
+                e.preventDefault();
+              }
+                
+                }> X </button>
                 <a href={`/products/${item._id}`} class="item-name">
                   {item.name}
                 </a>
@@ -85,14 +105,14 @@ const Cart = () => {
                     value={item.quantity}
                     // When number changed, cart updated in sessionStorage and added to cartState to prompt useEffect to rerender page
                     onChange={(e) => {
-                      const value = e.target.value;
+                      const value = parseInt(e.target.value);
                       cart[item._id] = { ...item, quantity: value };
                       sessionStorage.setItem("cart", JSON.stringify(cart));
                       setCartState(cart);
                     }}
                   >
                     {/* Loop through the array of numbers to add correct quantity in dropdown */}
-                    {inStockArray.map((item) => {
+                    {slicedStockArray.map((item, index) => {
                       return <option value={item}>{item}</option>;
                     })}
                   </select>{" "}
@@ -117,6 +137,7 @@ const Cart = () => {
         ) : (
           <div class="order-button">
             <input type="button" value="Place your order" />
+            <span>Nothing in your cart!</span>
           </div>
         )}
       </form>
@@ -215,6 +236,13 @@ const StyledCart = styled.form`
 
     input:active {
       transform: scale(0.9);
+    }
+  }
+
+  .btn-remove {
+    
+    &:hover {
+
     }
   }
 `;
