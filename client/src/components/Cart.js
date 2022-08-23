@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { ItemsContext } from "./ItemsContext";
 
 
 const Cart = () => {
   const [cartState, setCartState] = useState(null);
   const navigate = useNavigate();
 
+  const {numCartItems, setNumCartItems} = useContext(ItemsContext);
   let cart;
   let total = 0;
 
@@ -16,7 +18,9 @@ const Cart = () => {
   } else {
     cart = {};
   }
-
+  if(Object.values(cart).length > 0){
+    setNumCartItems(Object.values(cart).length);
+  }
   // Calculate total
   Object.values(cart).forEach((item) => {
     const itemPrice = item.price.slice(1);
@@ -28,15 +32,12 @@ const Cart = () => {
   //Can make the item disappear if the quantity is set to zero by the user, or alternatively create a delete button - stretch
   useEffect(() => {}, [cartState]);
   //function that listens to the X button, which will remove an item from the cart
-  const handleRemove = (e) =>{
-  e.preventDefault();
-
-  }
+  
   const handlePlaceOrder = (e) => {
     e.preventDefault();
 
     const finalCart = JSON.parse(sessionStorage.getItem("cart"));
-
+    
     // For each item in the final cart, update the number of items in stock in the "products" database
     Object.values(finalCart).forEach((item) => {
       const newNumInStock = item.numInStock - item.quantity;
