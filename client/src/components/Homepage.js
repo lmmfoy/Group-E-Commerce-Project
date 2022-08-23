@@ -12,16 +12,16 @@ const Homepage = () => {
       <VideoPage />
       <TextBox>
         <h3>You're bad with time.</h3>
-        <p> You missed your bus this morning.</p>
+        <p class="missed"> You missed your bus this morning.</p>
         <p>
           You were late to that important meeting, worked right through your
           lunch date, and left your daughter waiting 3 hours for pickup after
           band practice.
         </p>
-        <p>How do we know?</p>
+        <p class="how">How do we know?</p>
         <p>Nevermind that.</p>
         <div class="here-for-you">
-          <p>We know you need help </p>
+          <p>You need help </p>
           <h3>AND WE'RE HERE FOR YOU</h3>
         </div>
         <p>Explore our timepieces and accessories and fix your damn life.</p>
@@ -96,11 +96,20 @@ const TextBox = styled.div`
 
   h3 {
     font-size: 1.5em;
+    margin-bottom: 10px;
   }
 
   p {
     font-size: 20px;
     margin: 13px;
+  }
+
+  .missed {
+    margin: 20px 0 6px 0;
+  }
+
+  .how {
+    margin: 20px 0 6px 0;
   }
 
   .here-for-you {
