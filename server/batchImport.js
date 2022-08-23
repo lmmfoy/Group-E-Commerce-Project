@@ -19,10 +19,10 @@ const batchImport = async (dbName) => {
 
   const db = client.db(dbName);
   await db.collection("products").insertMany(items);
-  await db.collection("companies").insertMany(companies);
+  // await db.collection("companies").insertMany(companies);
   client.close();
   console.log('disconnected');
 }
 
 //Ran in terminal with node, commented out afterwards
-// batchImport("EcommerceDatabse");
+batchImport("EcommerceDatabse");
