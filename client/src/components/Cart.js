@@ -86,7 +86,7 @@ const Cart = () => {
                 // sessionStorage.removeItem("cart", )
                 let tempItem = JSON.parse(sessionStorage.getItem('cart'));
                 
-                // console.log(tempItem[item._id]);
+                console.log(tempItem[item._id]);
                 tempItem[item._id] = null;
                 sessionStorage.setItem('cart', JSON.stringify(cart))
                 // sessionStorage.removeItem()
@@ -136,8 +136,8 @@ const Cart = () => {
           </div>
         ) : (
           <div class="order-button">
-            <input type="button" value="Place your order" />
-            <span>Nothing in your cart!</span>
+            <input type="button" value="Nothing in your cart!" />
+            
           </div>
         )}
       </form>
