@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ReactCountryFlag from "react-country-flag";
+import background from "../media/img18.jpg";
 
 const ItemPage = () => {
   //state that will store the product object
@@ -66,14 +67,15 @@ const ItemPage = () => {
   };
 
   return (
-    <Wrapper>
-      {/* Conditional rendering below */}
+    <Box  style={{ backgroundImage: `url(${background})` }}>
+      <Wrapper>
+        {/* Conditional rendering below */}
       {loading && (
-        <>
+        <Conteiner>
           <div class="product-image">
             <img alt="base64 encoded URL of product" src={product.imageSrc} />
           </div>
-          <div>
+          <div className="company-style">
             <a href={company.url} class="company-name">
               {company.name}
               {/* Add company country flag */}
@@ -96,54 +98,116 @@ const ItemPage = () => {
               <Button>Out of stock</Button>
             )}
           </div>
-        </>
+        </Conteiner>
       )}
     </Wrapper>
+    </Box>
   );
 };
 
 export default ItemPage;
 
+const Box = styled.div`
+  height: 90vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
+const Conteiner = styled.div`
+  background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 1;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    max-width: auto;
+    max-height: auto;
+    padding: 50px 60px;
+`;
+
 const Wrapper = styled.div`
+  align-items: center;
   display: flex;
-  margin: 80px;
-  max-width: 900px;
   justify-content: center;
+  height: 100%;
+  width: 10;
   gap: 50px;
 
   img {
     width: 250px;
   }
 
-  .company-name {
-    font-size: 1.2em;
+  .company-style{
+    margin-top: 20px;
+  }
+
+  .company-name { 
+    font-size: 30px;
     text-decoration: none;
   }
 
   .flag {
     padding-left: 5px;
-    font-size: 100px;
+    font-size: 200px;
+    margin-top: -5px;
+    
   }
 
-  //bolding the quantity of the stock. can be removed
   span {
     font-weight: bold;
   }
 `;
 
 const Button = styled.button`
-  font-size: 1.4em;
-  background-color: #dcdcdc;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-
-  &:hover {
-    background-color: #0099cc;
-    color: white;
+padding: 12px 40px;
+margin: 15px;
+    font: 16px/24px Verdana, sans-serif;
+    text-decoration: none;
+    background: 
+      linear-gradient(90deg, 
+        #04f5ed, 
+        #5c27fe, 
+        #c165dd, 
+        #04f5ed);
+    background-size: 400%;
+    display: inline-block;
+    color: #fff;
+    border-radius: 8px;
+    position: relative;
+    border: none;
+    cursor: pointer;
+    animation: glowing 8s linear infinite;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+    &:after {
+      content: " ";
+      position: absolute;
+      border-radius: inherit;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
+      top: -6px;
+      background: inherit;
+      background-size: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      filter: blur(16px);
+      animation: glowing 7s linear infinite;
+      transform: translateZ(0);
+    }
+    &:hover {
+      &:after {
+        opacity: 1;
+      }
+    }
   }
-
-  &:active {
-    transform: scale(0.9);
-  }
+  
+  @keyframes glowing {
+    100% {
+      background-position: -400%;
+    }
 `;
