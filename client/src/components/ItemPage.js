@@ -110,7 +110,7 @@ const ItemPage = () => {
 export default ItemPage;
 
 const Box = styled.div`
-  height: 90vh;
+  height: 93vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

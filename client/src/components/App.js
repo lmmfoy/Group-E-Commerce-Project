@@ -38,7 +38,7 @@ const App = () => {
             />
           <Route path="" element={<h1>404: Oops!</h1>} />
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </AppContainer>
     </BrowserRouter>
   );
