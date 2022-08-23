@@ -13,23 +13,21 @@ const Homepage = () => {
       <TextBox>
         <h3>You're bad with time.</h3>
         <p> You missed your bus this morning.</p>
-        <p>You were late to that important meeting, worked right through your
+        <p>
+          You were late to that important meeting, worked right through your
           lunch date, and left your daughter waiting 3 hours for pickup after
           band practice.
         </p>
         <p>How do we know?</p>
         <p>Nevermind that.</p>
         <div class="here-for-you">
-          <p>We know you need help, and </p>
-          <h3>we're here for you</h3>
+          <p>We know you need help </p>
+          <h3>AND WE'RE HERE FOR YOU</h3>
         </div>
-        <p>
-          Discover the broad selection of watches to find a perfect combination
-          of style and functionality.
-        </p>
+        <p>Explore our timepieces and accessories and fix your damn life.</p>
       </TextBox>
       <TextBoxTwo>
-        <h2>Category</h2>
+        <h2>Our products:</h2>
       </TextBoxTwo>
 
       <ImageBox>
@@ -37,12 +35,12 @@ const Homepage = () => {
       </ImageBox>
       <>
         <HomepageBox>
-          <img src={img21} width="1000px" />
+          <img src={img21} width="1000px" alt="watch" />
         </HomepageBox>
         <FactsStyle>
           <ItemCategory>
             <Visual>
-              <img src={img23} width="600px" />
+              <img src={img23} width="600px" alt="watch" />
               <div className="text">
                 <div className="nameItems">
                   <p>Interesting Facts</p>
@@ -52,7 +50,7 @@ const Homepage = () => {
           </ItemCategory>
           <ItemCategory>
             <Visual>
-              <img src={img22} width="600px" />
+              <img src={img22} width="600px" alt="watch" />
               <div className="text">
                 <div className="nameItems">
                   <p>About Us</p>
@@ -94,7 +92,7 @@ const TextBox = styled.div`
   align-items: center;
   width: 600px;
   text-align: center;
-  margin: -20vh auto 0 auto;
+  margin: -28vh auto 0 auto;
 
   h3 {
     font-size: 1.5em;
@@ -104,13 +102,24 @@ const TextBox = styled.div`
     font-size: 20px;
     margin: 13px;
   }
+
+  .here-for-you {
+    width: 100vw;
+    padding: 15px 30px;
+    border-radius: 5px;
+
+    h3 {
+      margin: 0;
+    }
+  }
 `;
 const TextBoxTwo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 20px;
-  margin-top: 20px;
+  margin-top: 40px;
+  margin-bottom: -20px;
 `;
 
 const ItemCategory = styled.div`
