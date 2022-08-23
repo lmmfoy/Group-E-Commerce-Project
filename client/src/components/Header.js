@@ -1,22 +1,49 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { FiShoppingCart, FiHome } from "react-icons/fi";
 import logo from "../logo/logo.png";
+
+
+
 const Header = () => {
 
+
     return (
+        <StyledContainer>
         <Wrapper>
             <div className="sticky">
             <Nav>
+                    <LogoDiv>
                     <StyledImageLink to="/">w<StyledLogo src={logo}/> tching</StyledImageLink> 
+                    </LogoDiv>
+                    <SmallerRoutes>
                     <StyledNavLink to="/products"> Products</StyledNavLink>
                     <StyledNavLink to="/cart">Cart</StyledNavLink>
-
+                    </SmallerRoutes>
             </Nav>
             </div>
         </Wrapper>
+        </StyledContainer>
     )
 };
+
+const LogoDiv = styled.div`
+
+border-radius: 8px;
+
+`
+
+const SmallerRoutes = styled.div`
+display:flex;
+gap:20px;
+`
+
+const StyledContainer = styled.div`
+position:relative;
+top:8px;
+left:24px;
+`
 
 const StyledImageLink = styled(NavLink)`
 display:flex;
@@ -33,6 +60,11 @@ position:relative;
     border-radius: 8px;
     border:3px lavender solid;
 }
+&.active {
+    border-radius: 8px;
+    box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
+    border:none;
+}
 
 `
 
@@ -47,7 +79,7 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 /* align-items: center; */
-height:60px;
+height:64px;
 
 .sticky{
     position:sticky;
@@ -60,15 +92,18 @@ const Nav = styled.div`
 
 padding:0px 80px 16px 0;
 display:flex;
-justify-content: space-around;
+justify-content: space-between;
 gap:70px;
+position:relative;
+left:16px;
 
 `
 const StyledNavLink = styled(NavLink)`
 color:black;
 text-decoration: none;
-padding: 16px 16px 8px;
-
+padding: 16px 16px;
+display:flex;
+align-items: center;
 top:3px;
 border: 3px var(--primary-color) solid;
 position:relative;
@@ -82,12 +117,15 @@ left: -30px;
     border-radius: 8px;
     color:black;
     border:3px lavender solid;
+    
 }
 &.active {
     background-color: gray;
     opacity: .5;
     border-radius: 8px;
     color:white;
+    box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
+    border:none;
 }
 `
 

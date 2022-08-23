@@ -5,16 +5,14 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 const ItemCard = (props) => {
   const product = props.product
-  const handleClick = () => {
-    window.open(`/products/${product._id}`)
-  }
+  const navigate = useNavigate()
 
   return (
     <Wrapper outOfStock={product.numInStock} >
     {/* Conditional rendering below */}
     {(props.loading) &&
       <>
-      <NavigationLink onClick={handleClick}>
+      <NavigationLink to={`/products/${product._id}`}>
       <StyledImg alt="base64 encoded URL of product" src={product.imageSrc}/>
       <StyledInfo>
         <p className="name">{product.name}</p>
@@ -52,7 +50,7 @@ max-height:200px;
 margin: 30px 0 0 0;
 `
 
-const NavigationLink = styled.button`
+const NavigationLink = styled(NavLink)`
 text-decoration: none;
 color:black;
 display:flex;
@@ -69,7 +67,7 @@ const Wrapper = styled.div`
 width:200px;
 padding: 10px;
 
-opacity: ${(props) => (props.outOfStock === 0 ? "60%" : "1")}
+opacity: ${(props) => (props.outOfStock === 0 ? "20%" : "1")}
 
 `
 
