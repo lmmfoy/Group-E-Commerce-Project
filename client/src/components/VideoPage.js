@@ -1,45 +1,50 @@
 import styled from "styled-components";
-import videoBg from "../media/videoBg.mp4"
-
+import videoBg from "../media/videoBg.mp4";
 
 const VideoPage = () => {
-    return(
-        <VideoStyle>
-            <video src= {videoBg} autoPlay loop muted/>
-            <div className="VideoText">
-                <h1>WATCH IN</h1>
-                <p> Discover the broad selection of  watches</p>
-            </div>
-        </VideoStyle>
-    )
-}
-
+  return (
+    <VideoStyle>
+      <video src={videoBg} autoPlay loop muted />
+      <div className="VideoText">
+        <p> Any time of the day or night,</p>
+        <p>we're always</p>
+        <h1>WATCHING</h1>
+      </div>
+    </VideoStyle>
+  );
+};
 
 const VideoStyle = styled.div`
-width: 100%;
-height: 100vh;
-video{
+  width: 100%;
+  height: 100vh;
+  video {
     width: 100%;
-    height: 70%;
-    object-fit:cover;
-}
-
-.VideoText{
+    height: 70vh;
+    object-fit: cover;
     position: absolute;
+  }
+
+  .VideoText {
+    position: relative;
     width: 100%;
-    height: 30%;
-    top: 0;
+    padding-top: 48vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     color: white;
-    h1{
-        font-size: 50px;
+    font-weight: 700;
+
+    p {
+      font-size: 2em;
+      margin: 0px;
+      padding-top: 10px;
     }
-    p{
-        font-size: 30px;
+
+    h1 {
+      font-size: 4em;
+      margin: 10px;
     }
-}
-`
+  }
+`;
 export default VideoPage;
