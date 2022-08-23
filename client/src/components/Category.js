@@ -116,8 +116,11 @@ const Visual = styled.div`
     font-weight: 500;
     letter-spacing: 0.1em;
     line-height: 1.5;
+
     p {
-      font-size: 30px;
+      font-size: 2.6em;
+      -webkit-text-stroke: 0.1px grey;
+      font-weight: 900;
     }
   }
 `;
