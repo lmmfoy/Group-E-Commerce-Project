@@ -61,7 +61,7 @@ img{
     position: absolute;
     width: 100%;
     height: 50%;
-    top: 0;
+    top: 64px;
     display: flex;
     flex-direction: column;
     justify-content: center;
