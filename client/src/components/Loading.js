@@ -10,7 +10,7 @@ const Loading = () => {
 };
 
 const StyledDiv = styled.div`
-  margin: 150px 0 0 0;
+  margin: 100px 0 0 0;
   padding: 0;
   width: 100vw;
   display: flex;
