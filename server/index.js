@@ -9,8 +9,6 @@ const {
   updateItem,
   getCategoryItems,
   getCompanyInfo,
-  postPurchasedItem,
-  deleteCart,
 } = require("./handlers.js");
 
 const PORT = 4000;

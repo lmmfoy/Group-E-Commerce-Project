@@ -112,36 +112,10 @@ const getCompanyInfo = async (req, res) => {
   }
 };
 
-// Possible To Do - Stretch
-const postPurchasedItem = async (req, res) => {
-  try {
-    await client.connect();
-    const db = client.db();
-
-    res.status(200).json({ status: 200, data: result });
-  } catch (err) {
-    res.status(404).json({ status: 404, data: err });
-  }
-};
-
-// Possible To Do - Stretch
-const deleteCart = async (req, res) => {
-  try {
-    await client.connect();
-    const db = client.db();
-
-    res.status(200).json({ status: 200, data: result });
-  } catch (err) {
-    res.status(404).json({ status: 404, data: err });
-  }
-};
-
 module.exports = {
   getAllItems,
   getSingleItem,
   updateItem,
   getCategoryItems,
   getCompanyInfo,
-  postPurchasedItem,
-  deleteCart,
 };
