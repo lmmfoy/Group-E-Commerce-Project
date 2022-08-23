@@ -79,10 +79,12 @@ const ItemPage = () => {
             <a href={company.url} class="company-name">
               {company.name}
               {/* Add company country flag */}
+              { company.countryCode &&
               <ReactCountryFlag
                 class="flag"
                 countryCode={`${company.countryCode}`}
               />
+              }
             </a>
             <h1>{product.name}</h1>
             <div>
