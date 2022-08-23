@@ -60,7 +60,7 @@ flex-direction: column;
 align-items: center;
 justify-content: space-between;
 border:none;
-background-color: var(--primary-color);
+background-color: white;
 
 `
 
