@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FiShoppingCart, FiHome } from "react-icons/fi";
 import logo from "../logo/logo.png";
+import { ItemsContext } from "./ItemsContext";
 
 
 
 const Header = () => {
-
-
-    return (
+    const { numCartItems} = useContext(ItemsContext);
+        return (
         <StyledContainer>
         <Wrapper>
             <div className="sticky">
@@ -19,7 +19,7 @@ const Header = () => {
                     </LogoDiv>
                     <SmallerRoutes>
                     <StyledNavLink to="/products"> Products</StyledNavLink>
-                    <StyledNavLink to="/cart">Cart</StyledNavLink>
+                    <StyledNavLink to="/cart">Cart ({numCartItems && numCartItems})</StyledNavLink>
                     </SmallerRoutes>
             </Nav>
             </div>

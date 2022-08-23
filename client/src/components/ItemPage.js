@@ -45,26 +45,31 @@ const ItemPage = () => {
     // This is for when "add to cart" button clicked
     // Checks sessionStorage to see if there are already items in the cart, if not assigns cart variable empty object
     let cart;
-
+  
     if (sessionStorage.getItem("cart")) {
       cart = JSON.parse(sessionStorage.getItem("cart"));
     } else {
       cart = {};
     }
-
+  
     // If the cart doesn't contain item id already, add it, else update the quantity
     const itemID = product._id;
     if (!cart[itemID]) {
       cart[itemID] = { ...product, quantity: 1 };
-    } else {
+    } else if(cart[itemID].quantity < cart[itemID].numInStock) {
+      
       cart[itemID].quantity = cart[itemID].quantity + 1;
+    }
+    else {
+      window.alert(`You have reached the maximum quantity for "${cart[itemID].name}". You will be redirected to view your cart items.`);
     }
     // Save the cart in sessionStorage
     sessionStorage.setItem("cart", JSON.stringify(cart));
-
+  
     // Navigate to Cart page
     navigate("/cart");
   };
+  
 
   return (
     <Box  style={{ backgroundImage: `url(${background})` }}>
