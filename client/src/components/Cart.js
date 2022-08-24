@@ -3,25 +3,28 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { ItemsContext } from "./ItemsContext";
 import Button from "./Button";
-
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cartState, setCartState] = useState(null);
   const navigate = useNavigate();
 
-  const {numCartItems, setNumCartItems} = useContext(ItemsContext);
+  const { setNumCartItems } = useContext(ItemsContext);
   let cart;
   let total = 0;
 
   // Checks sessionStorage to see if there are already items in the cart, if not assigns cart variable empty object
   if (sessionStorage.getItem("cart")) {
     cart = JSON.parse(sessionStorage.getItem("cart"));
+    let cartItemsNum = 0;
+    Object.values(cart).forEach((item) => {
+      cartItemsNum += item.quantity;
+    });
+    setNumCartItems(cartItemsNum);
   } else {
     cart = {};
   }
-  if(Object.values(cart).length > 0){
-    setNumCartItems(Object.values(cart).length);
-  }
+
   // Calculate total
   Object.values(cart).forEach((item) => {
     const itemPrice = item.price.slice(1);
@@ -32,13 +35,12 @@ const Cart = () => {
   // This is to get the page to rerender when someone increases or decreases the number of items they want - probably something should actually happen in it
   //Can make the item disappear if the quantity is set to zero by the user, or alternatively create a delete button - stretch
   useEffect(() => {}, [cartState]);
-  //function that listens to the X button, which will remove an item from the cart
-  
+
   const handlePlaceOrder = (e) => {
     e.preventDefault();
 
     const finalCart = JSON.parse(sessionStorage.getItem("cart"));
-    
+
     // For each item in the final cart, update the number of items in stock in the "products" database
     Object.values(finalCart).forEach((item) => {
       const newNumInStock = item.numInStock - item.quantity;
@@ -55,12 +57,13 @@ const Cart = () => {
       })
         .then((res) => res.json())
         .then((json) => {
+          // If a success, reset everything
           if (json.status === 200) {
             sessionStorage.clear();
+            setNumCartItems(0);
           }
         });
       navigate("/cart/confirmed");
-      // }
     });
   };
 
@@ -83,23 +86,22 @@ const Cart = () => {
             let slicedStockArray = inStockArray.slice(1);
             return (
               <div class="cart-item">
-              <button className="btn-remove" onClick={(e) =>{
-                //set quantity value to 0
-                // sessionStorage.removeItem("cart", )
-                let tempItem = JSON.parse(sessionStorage.getItem('cart'));
-                
-                console.log(tempItem);
-                delete tempItem[item._id];
-                sessionStorage.setItem('cart', JSON.stringify(tempItem))
-                // sessionStorage.removeItem()
-                setCartState(tempItem);
-                e.preventDefault();
-              }
-                
-                }> X </button>
-                <a href={`/products/${item._id}`} class="item-name">
+                <button
+                  className="btn-remove"
+                  onClick={(e) => {
+                    //set quantity value to 0
+                    let tempItem = JSON.parse(sessionStorage.getItem("cart"));
+                    delete tempItem[item._id];
+                    sessionStorage.setItem("cart", JSON.stringify(tempItem));
+                    setCartState(tempItem);
+                    e.preventDefault();
+                  }}
+                >
+                  X
+                </button>
+                <Link to={`/products/${item._id}`} class="item-name">
                   {item.name}
-                </a>
+                </Link>
                 <div class="item-price">${itemPrice}</div>
                 <div class="item-quantity">
                   <select
@@ -218,6 +220,7 @@ const StyledCart = styled.form`
     text-align: right;
     padding-right: 35px;
 }
+
 `;
 
 export default Cart;
