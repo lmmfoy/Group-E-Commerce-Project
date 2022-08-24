@@ -37,7 +37,5 @@ express()
   .patch("/products/:_id", updateItem)
   .get("/products/categories/:_category", getCategoryItems)
   .get("/products/company/:company_id", getCompanyInfo)
-  // .post("/cart", postPurchasedItem) //stretch
-  // .delete("/cart", deleteCart) //stretch
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
