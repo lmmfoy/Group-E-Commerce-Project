@@ -1,135 +1,124 @@
 import styled from "styled-components";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import { FiShoppingCart, FiHome } from "react-icons/fi";
 import logo from "../logo/logo.png";
 import { ItemsContext } from "./ItemsContext";
 
-
-
 const Header = () => {
-    const { numCartItems} = useContext(ItemsContext);
-        return (
-        <StyledContainer>
-        <Wrapper>
-            <div className="sticky">
-            <Nav>
-                    <LogoDiv>
-                    <StyledImageLink to="/">w<StyledLogo src={logo}/> tching</StyledImageLink> 
-                    </LogoDiv>
-                    <SmallerRoutes>
-                    <StyledNavLink to="/products"> Products</StyledNavLink>
-                    <StyledNavLink to="/cart">Cart ({numCartItems && numCartItems})</StyledNavLink>
-                    </SmallerRoutes>
-            </Nav>
-            </div>
-        </Wrapper>
-        </StyledContainer>
-    )
+  const { numCartItems } = useContext(ItemsContext);
+  return (
+    <StyledContainer>
+      <Wrapper>
+        <div className="sticky">
+          <Nav>
+            <LogoDiv>
+              <StyledImageLink to="/">
+                w<StyledLogo src={logo} /> tching
+              </StyledImageLink>
+            </LogoDiv>
+            <SmallerRoutes>
+              <StyledNavLink to="/products"> Products</StyledNavLink>
+              <StyledNavLink to="/cart">
+                Cart ({numCartItems && numCartItems})
+              </StyledNavLink>
+            </SmallerRoutes>
+          </Nav>
+        </div>
+      </Wrapper>
+    </StyledContainer>
+  );
 };
 
 const LogoDiv = styled.div`
-
-border-radius: 8px;
-
-`
+  position: relative;
+  left: 24px;
+  border-radius: 8px;
+`;
 
 const SmallerRoutes = styled.div`
-display:flex;
-gap:20px;
-`
+  display: flex;
+  gap: 20px;
+`;
 
 const StyledContainer = styled.div`
-position:relative;
-top:8px;
-left:24px;
-`
+  position: relative;
+  top: 8px;
+`;
 
 const StyledImageLink = styled(NavLink)`
-display:flex;
-text-decoration: none;
-color:black;
-align-items:center;
-font-size: 30px;
-border:3px var(--primary-color) solid;
-gap:2px;
-top:3px;
-position:relative;
-&:hover {
-    opacity: .5;
+  display: flex;
+  text-decoration: none;
+  color: black;
+  align-items: center;
+  font-size: 30px;
+  border: 3px var(--primary-color) solid;
+  gap: 2px;
+  top: 3px;
+  position: relative;
+  &:hover {
+    opacity: 0.5;
     border-radius: 8px;
-    border:3px lavender solid;
-}
-&.active {
+    border: 3px lavender solid;
+  }
+  &.active {
     border-radius: 8px;
     box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
-    border:none;
-}
-
-`
+    border: none;
+  }
+`;
 
 const StyledLogo = styled.img`
-height:50px;
-width:56px;
-
-`
+  height: 50px;
+  width: 56px;
+`;
 
 const Wrapper = styled.div`
-display:flex;
-flex-direction:column;
-justify-content:center;
-/* align-items: center; */
-height:64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  height: 64px;
 
-.sticky{
-    position:sticky;
-    top:0px;
-}
-
-`
+  .sticky {
+    position: sticky;
+    top: 0px;
+  }
+`;
 
 const Nav = styled.div`
-
-padding:0px 80px 16px 0;
-display:flex;
-justify-content: space-between;
-gap:70px;
-position:relative;
-left:16px;
-
-`
+  padding: 0px 80px 16px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 70px;
+  position: relative;
+  left: 16px;
+`;
 const StyledNavLink = styled(NavLink)`
-color:black;
-text-decoration: none;
-padding: 16px 16px;
-display:flex;
-align-items: center;
-top:3px;
-border: 3px var(--primary-color) solid;
-position:relative;
-left: -30px;
+  color: black;
+  text-decoration: none;
+  padding: 16px 16px;
+  display: flex;
+  align-items: center;
+  top: 3px;
+  border: 3px var(--primary-color) solid;
+  position: relative;
+  left: -30px;
 
-
-
-&:hover {
+  &:hover {
     background-color: lightgray;
-    opacity: .5;
+    opacity: 0.5;
     border-radius: 8px;
-    color:black;
-    border:3px lavender solid;
-    
-}
-&.active {
+    color: black;
+    border: 3px lavender solid;
+  }
+  &.active {
     background-color: gray;
-    opacity: .5;
+    opacity: 0.5;
     border-radius: 8px;
-    color:white;
+    color: white;
     box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
-    border:none;
-}
-`
+    border: none;
+  }
+`;
 
-export default Header
-
-
-
+export default Header;

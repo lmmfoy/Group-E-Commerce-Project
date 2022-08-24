@@ -13,7 +13,8 @@ const Cart = () => {
   let cart;
   let total = 0;
 
-  // Checks sessionStorage to see if there are already items in the cart, if not assigns cart variable empty object
+  // Checks sessionStorage to see if there are already items in the cart, if not assigns cart variable an empty object
+  // Calculate the number of items in the cart, and set the numCartItems
   if (sessionStorage.getItem("cart")) {
     cart = JSON.parse(sessionStorage.getItem("cart"));
     let cartItemsNum = 0;
@@ -25,17 +26,17 @@ const Cart = () => {
     cart = {};
   }
 
-  // Calculate total
+  // Calculate price total
   Object.values(cart).forEach((item) => {
     const itemPrice = item.price.slice(1);
     const subTotal = (itemPrice * item.quantity).toFixed(2);
     total += parseFloat(subTotal);
   });
 
-  // This is to get the page to rerender when someone increases or decreases the number of items they want - probably something should actually happen in it
-  //Can make the item disappear if the quantity is set to zero by the user, or alternatively create a delete button - stretch
+  // This is to get the page to rerender when someone increases or decreases the number of items they want
   useEffect(() => {}, [cartState]);
 
+  // When a user presses the checkout button
   const handlePlaceOrder = (e) => {
     e.preventDefault();
 
@@ -70,11 +71,11 @@ const Cart = () => {
   return (
     <StyledCart>
       <form>
-        <div class="titles">
-          <div class="product-title">Product</div>
-          <div class="short-title">Price</div>
-          <div class="short-title">Quantity</div>
-          <div class="short-title">Subtotal</div>
+        <div className="titles">
+          <div className="product-title">Product</div>
+          <div className="short-title">Price</div>
+          <div className="short-title">Quantity</div>
+          <div className="short-title">Subtotal</div>
         </div>
         <div>
           {Object.values(cart).map((item) => {
@@ -85,7 +86,7 @@ const Cart = () => {
             //slice the array to remove the option of picking zero
             let slicedStockArray = inStockArray.slice(1);
             return (
-              <div class="cart-item">
+              <div className="cart-item">
                 <button
                   className="btn-remove"
                   onClick={(e) => {
@@ -99,14 +100,15 @@ const Cart = () => {
                 >
                   X
                 </button>
-                <Link to={`/products/${item._id}`} class="item-name">
+                <Link to={`/products/${item._id}`} className="item-name">
                   {item.name}
                 </Link>
-                <div class="item-price">${itemPrice}</div>
-                <div class="item-quantity">
+                <div className="item-price">${itemPrice}</div>
+                <div className="item-quantity">
                   <select
                     id={item._id}
                     value={item.quantity}
+                    className="select"
                     // When number changed, cart updated in sessionStorage and added to cartState to prompt useEffect to rerender page
                     onChange={(e) => {
                       const value = parseInt(e.target.value);
@@ -121,21 +123,21 @@ const Cart = () => {
                     })}
                   </select>{" "}
                 </div>
-                <div class="item-subtotal">
+                <div className="item-subtotal">
                   ${(itemPrice * item.quantity).toFixed(2)}
                 </div>
               </div>
             );
           })}
         </div>
-        <div class="total">Total: ${total.toFixed(2)}</div>
+        <div className="total">Total: ${total.toFixed(2)}</div>
         {/* Can only click order button if there is a product in the cart */}
         {total ? (
-          <div class="order-button">
+          <div className="order-button">
             <Button onClick={handlePlaceOrder}>Place your order</Button>
           </div>
         ) : (
-          <div class="order-button">
+          <div className="order-button">
             <Button>Nothing in your cart!</Button>
           </div>
         )}
@@ -146,6 +148,10 @@ const Cart = () => {
 
 const StyledCart = styled.form`
   margin-top: 80px;
+
+  .select {
+    width: 40px;
+  }
 
   .titles,
   .cart-item,
@@ -219,8 +225,7 @@ const StyledCart = styled.form`
   .order-button {
     text-align: right;
     padding-right: 35px;
-}
-
+  }
 `;
 
 export default Cart;
