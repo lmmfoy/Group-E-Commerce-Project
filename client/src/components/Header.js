@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { FiShoppingCart, FiHome } from "react-icons/fi";
 import logo from "../logo/logo.png";
 import { ItemsContext } from "./ItemsContext";
