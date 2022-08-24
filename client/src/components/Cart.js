@@ -108,6 +108,7 @@ const Cart = () => {
                   <select
                     id={item._id}
                     value={item.quantity}
+                    class="select"
                     // When number changed, cart updated in sessionStorage and added to cartState to prompt useEffect to rerender page
                     onChange={(e) => {
                       const value = parseInt(e.target.value);
@@ -147,6 +148,10 @@ const Cart = () => {
 
 const StyledCart = styled.form`
   margin-top: 80px;
+
+  .select {
+    width: 40px;
+  }
 
   .titles,
   .cart-item,

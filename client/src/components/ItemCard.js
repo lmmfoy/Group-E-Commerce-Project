@@ -39,6 +39,7 @@ const StyledInfo = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    word-break: break-all;
   }
 `;
 
