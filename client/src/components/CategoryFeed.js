@@ -7,9 +7,11 @@ import Loading from "./Loading";
 
 const CategoryFeed = (props) => {
     const { _category } = useParams();
+    //stores all the items of selected category
     const [items, setItems] = useState(null);
     //loading state for fetch
     const [loading, setLoading] = useState(false);
+    //fetch endpoint to get and store all the items of selected category
     useEffect(() => {
         fetch(`/products/categories/${_category}`)
         .then((res) => res.json())

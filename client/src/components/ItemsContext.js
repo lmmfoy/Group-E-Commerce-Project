@@ -1,8 +1,11 @@
 import { createContext, useState } from "react";
 
 export const ItemsContext = createContext(null);
+
 export const ItemsProvider = ({ children }) => {
+    //variable to store selected category value
   const [selectedCaregory, setSelectedCategory] = useState("");
+      //variable to manipulate the quantity of items placed in the cart
   const [numCartItems, setNumCartItems] = useState(0);
   return (
     <ItemsContext.Provider
@@ -17,3 +20,4 @@ export const ItemsProvider = ({ children }) => {
     </ItemsContext.Provider>
   );
 };
+

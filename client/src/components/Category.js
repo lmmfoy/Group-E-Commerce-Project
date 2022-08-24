@@ -13,6 +13,7 @@ import { ItemsContext } from "./ItemsContext";
 
 const Category = () => {
   const navigate = useNavigate();
+  //array of all categories
   const [category, setCategory] = useState([
     "Fitness",
     "Medical",
@@ -21,7 +22,9 @@ const Category = () => {
     "Industrial",
     "Pets",
   ]);
+  //consume setSelectedCategory from ItemsContext provider 
   const { setSelectedCategory } = useContext(ItemsContext);
+  //function to redirect on selected category page
   const handleSelectedCategory = (category) => {
     setSelectedCategory(category);
     navigate(`/products/categories/${category}`);
@@ -119,14 +122,12 @@ const Visual = styled.div`
   }
 `;
 
-
 const ItemsCategory = styled.div`
   display: flex;
   justify-content: end;
   flex-wrap: wrap;
-
-  /* opacity: 1; */
 `;
+
 const ItemCategoryBtn = styled.button`
   width: 25%;
   padding-right: 2px;
@@ -136,11 +137,13 @@ const ItemCategoryBtn = styled.button`
   border: none;
   background: transparent;
   margin-bottom:150px;
+
   img {
     background: #fafafa;
     border-radius: 4px;
     box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
   }
+  
   img:hover {
     box-shadow: 0 0 45px 2px #1cd6ce;
     opacity: 70%;
