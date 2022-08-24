@@ -1,28 +1,33 @@
-import styled from "styled-components";
 
-import img15 from "../media/img15.jpg";
+import styled from "styled-components";
+import logo from "../logo/logo.png";
 
 const Footer = () => (
-    <Wrapper>
-        <img src={img15}width = "1000px"/>
-    </Wrapper>
+    <FooterStyle>
+        <Box>
+            <StyledLogo src={logo}/>
+        </Box>
+    </FooterStyle>
 );
 
-const Wrapper = styled.div`
+const FooterStyle = styled.div`
+    margin-top: 1rem;
+    padding: .5rem;
+    background-color: #2C394B;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: .8;
+`
+const Box =styled.div`
     display: flex;
-    margin-top: 100px;
-    height: 120px;
-    width: 100%;
-img{
-    width: 100%;
-    height: 100%;
-    object-fit:cover;
-}
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;    
+`
+const StyledLogo = styled.img`
+height:60px;
 `;
-// const Logo = styled.img`
-//   height: 100%;
-// `;
-
-
 
 export default Footer;

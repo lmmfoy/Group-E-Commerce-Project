@@ -29,11 +29,11 @@ const Category = () => {
   return (
     <TopCategory>
       <Box>
-        <TopCategoryInner>
+        <>
           <Visual>
             <img className="Img" src={img7} width="1000px" alt="watch" />
           </Visual>
-          <Content>
+          <>
             <h1>Category</h1>
             <ItemsCategory>
               {category.map((item) => {
@@ -76,8 +76,8 @@ const Category = () => {
                 );
               })}
             </ItemsCategory>
-          </Content>
-        </TopCategoryInner>
+          </>
+        </>
       </Box>
     </TopCategory>
   );
@@ -94,12 +94,6 @@ const TopCategory = styled.div`
 const Box = styled.div`
   display: flex;
   max-width: max-content;
-`;
-
-const TopCategoryInner = styled.div`
-  /* position: absolute;
-    width: 60%;
-    height: 100%; */
 `;
 
 const Visual = styled.div`
@@ -125,7 +119,6 @@ const Visual = styled.div`
   }
 `;
 
-const Content = styled.div``;
 
 const ItemsCategory = styled.div`
   display: flex;
@@ -142,6 +135,7 @@ const ItemCategoryBtn = styled.button`
   margin: 10px -20px;
   border: none;
   background: transparent;
+  margin-bottom:150px;
   img {
     background: #fafafa;
     border-radius: 4px;
