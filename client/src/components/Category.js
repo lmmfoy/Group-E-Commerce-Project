@@ -22,7 +22,7 @@ const Category = () => {
     "Industrial",
     "Pets",
   ]);
-  //consume setSelectedCategory from ItemsContext provider 
+  //consume setSelectedCategory from ItemsContext provider
   const { setSelectedCategory } = useContext(ItemsContext);
   //function to redirect on selected category page
   const handleSelectedCategory = (category) => {
@@ -136,14 +136,14 @@ const ItemCategoryBtn = styled.button`
   margin: 10px -20px;
   border: none;
   background: transparent;
-  margin-bottom:150px;
+  margin-bottom: 150px;
 
   img {
     background: #fafafa;
     border-radius: 4px;
     box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
   }
-  
+
   img:hover {
     box-shadow: 0 0 45px 2px #1cd6ce;
     opacity: 70%;

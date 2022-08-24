@@ -13,7 +13,8 @@ const Cart = () => {
   let cart;
   let total = 0;
 
-  // Checks sessionStorage to see if there are already items in the cart, if not assigns cart variable empty object
+  // Checks sessionStorage to see if there are already items in the cart, if not assigns cart variable an empty object
+  // Calculate the number of items in the cart, and set the numCartItems
   if (sessionStorage.getItem("cart")) {
     cart = JSON.parse(sessionStorage.getItem("cart"));
     let cartItemsNum = 0;
@@ -25,17 +26,17 @@ const Cart = () => {
     cart = {};
   }
 
-  // Calculate total
+  // Calculate price total
   Object.values(cart).forEach((item) => {
     const itemPrice = item.price.slice(1);
     const subTotal = (itemPrice * item.quantity).toFixed(2);
     total += parseFloat(subTotal);
   });
 
-  // This is to get the page to rerender when someone increases or decreases the number of items they want - probably something should actually happen in it
-  //Can make the item disappear if the quantity is set to zero by the user, or alternatively create a delete button - stretch
+  // This is to get the page to rerender when someone increases or decreases the number of items they want
   useEffect(() => {}, [cartState]);
 
+  // When a user presses the checkout button
   const handlePlaceOrder = (e) => {
     e.preventDefault();
 
@@ -219,8 +220,7 @@ const StyledCart = styled.form`
   .order-button {
     text-align: right;
     padding-right: 35px;
-}
-
+  }
 `;
 
 export default Cart;

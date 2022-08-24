@@ -66,7 +66,7 @@ const Homepage = () => {
 
 const Container = styled.div`
   position: relative;
-  margin-bottom:150px;
+  margin-bottom: 150px;
 `;
 const FactsStyle = styled.div`
   display: flex;

@@ -14,8 +14,6 @@ const ItemPage = () => {
   //state to store company information
   const [company, setCompany] = useState({});
 
-  const [stock, setStock] = useState(0);
-
   //used to navigate away from this page to the /cart page
   let navigate = useNavigate();
   //pulls the id from the URL to find the appropriate item
@@ -46,69 +44,68 @@ const ItemPage = () => {
     // This is for when "add to cart" button clicked
     // Checks sessionStorage to see if there are already items in the cart, if not assigns cart variable empty object
     let cart;
-  
+
     if (sessionStorage.getItem("cart")) {
       cart = JSON.parse(sessionStorage.getItem("cart"));
     } else {
       cart = {};
     }
-  
+
     // If the cart doesn't contain item id already, add it, else update the quantity
     const itemID = product._id;
     if (!cart[itemID]) {
       cart[itemID] = { ...product, quantity: 1 };
-    } else if(cart[itemID].quantity < cart[itemID].numInStock) {
-      
+    } else if (cart[itemID].quantity < cart[itemID].numInStock) {
       cart[itemID].quantity = cart[itemID].quantity + 1;
-    }
-    else {
-      window.alert(`You have reached the maximum quantity for "${cart[itemID].name}". You will be redirected to view your cart items.`);
+    } else {
+      window.alert(
+        `You have reached the maximum quantity for "${cart[itemID].name}". You will be redirected to view your cart items.`
+      );
     }
     // Save the cart in sessionStorage
     sessionStorage.setItem("cart", JSON.stringify(cart));
-  
+
     // Navigate to Cart page
     navigate("/cart");
   };
-  
 
   return (
-    <Box  style={{ backgroundImage: `url(${background})` }}>
+    <Box style={{ backgroundImage: `url(${background})` }}>
       <Wrapper>
         {/* Conditional rendering below */}
-      {loading && (
-        <Conteiner>
-          <div class="product-image">
-            <img alt="base64 encoded URL of product" src={product.imageSrc} />
-          </div>
-          <div className="company-style">
-            <a href={company.url} class="company-name">
-              {company.name}
-              {/* Add company country flag */}
-              { company.countryCode &&
-              <ReactCountryFlag
-                class="flag"
-                countryCode={`${company.countryCode}`}
-              />
-              }
-            </a>
-            <h1>{product.name}</h1>
-            <div>
-              <p>{product.price}</p>
-              <p>
-                Quantity remaining: <span>{product.numInStock}</span>
-              </p>
+        {loading && (
+          <Container>
+            <div class="product-image">
+              <img alt="base64 encoded URL of product" src={product.imageSrc} />
             </div>
-            {/* Check if there is stock, if not don't allow user to click button */}
-            {product.numInStock > 0 ? (
-              <Button onClick={addToCartHandleClick}>Add to cart</Button>
-            ) : (
-              <Button>Out of stock</Button>
-            )}
-          </div>
-        </Conteiner>
-      )}
-    </Wrapper>
+            <div className="company-style">
+              <a href={company.url} class="company-name">
+                {company.name}
+                {/* Add company country flag */}
+                {company.countryCode && (
+                  <ReactCountryFlag
+                    class="flag"
+                    countryCode={`${company.countryCode}`}
+                  />
+                )}
+              </a>
+              <h1>{product.name}</h1>
+              <div>
+                <p>{product.price}</p>
+                <p>
+                  Quantity remaining: <span>{product.numInStock}</span>
+                </p>
+              </div>
+              {/* Check if there is stock, if not don't allow user to click button */}
+              {product.numInStock > 0 ? (
+                <Button onClick={addToCartHandleClick}>Add to cart</Button>
+              ) : (
+                <Button>Out of stock</Button>
+              )}
+            </div>
+          </Container>
+        )}
+      </Wrapper>
     </Box>
   );
 };
@@ -122,17 +119,17 @@ const Box = styled.div`
   background-size: cover;
 `;
 
-const Conteiner = styled.div`
+const Container = styled.div`
   background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    font-family: sans-serif;
-    text-align: center;
-    line-height: 1;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    max-width: auto;
-    max-height: auto;
-    padding: 50px 60px;
+  border-radius: 5px;
+  font-family: sans-serif;
+  text-align: center;
+  line-height: 1;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  max-width: auto;
+  max-height: auto;
+  padding: 50px 60px;
 `;
 
 const Wrapper = styled.div`
@@ -147,11 +144,11 @@ const Wrapper = styled.div`
     width: 250px;
   }
 
-  .company-style{
+  .company-style {
     margin-top: 20px;
   }
 
-  .company-name { 
+  .company-name {
     font-size: 30px;
     text-decoration: none;
   }
@@ -160,12 +157,9 @@ const Wrapper = styled.div`
     padding-left: 5px;
     font-size: 200px;
     margin-top: -5px;
-    
   }
 
   span {
     font-weight: bold;
   }
 `;
-
-
