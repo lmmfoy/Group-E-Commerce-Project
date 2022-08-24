@@ -8,7 +8,7 @@ const Cart = () => {
   const [cartState, setCartState] = useState(null);
   const navigate = useNavigate();
 
-  const { numCartItems, setNumCartItems } = useContext(ItemsContext);
+  const { setNumCartItems } = useContext(ItemsContext);
   let cart;
   let total = 0;
 
@@ -18,7 +18,7 @@ const Cart = () => {
     let cartItemsNum = 0;
     Object.values(cart).forEach((item) => {
       cartItemsNum += item.quantity;
-    })
+    });
     setNumCartItems(cartItemsNum);
   } else {
     cart = {};
@@ -34,7 +34,7 @@ const Cart = () => {
   // This is to get the page to rerender when someone increases or decreases the number of items they want - probably something should actually happen in it
   //Can make the item disappear if the quantity is set to zero by the user, or alternatively create a delete button - stretch
   useEffect(() => {}, [cartState]);
-  
+
   const handlePlaceOrder = (e) => {
     e.preventDefault();
 
@@ -56,9 +56,10 @@ const Cart = () => {
       })
         .then((res) => res.json())
         .then((json) => {
+          // If a success, reset everything
           if (json.status === 200) {
             sessionStorage.clear();
-            setNumCartItems(0)
+            setNumCartItems(0);
           }
         });
       navigate("/cart/confirmed");
@@ -94,7 +95,9 @@ const Cart = () => {
                     setCartState(tempItem);
                     e.preventDefault();
                   }}
-                >X</button>
+                >
+                  X
+                </button>
                 <Link to={`/products/${item._id}`} class="item-name">
                   {item.name}
                 </Link>
