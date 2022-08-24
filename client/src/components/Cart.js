@@ -138,7 +138,11 @@ const Cart = () => {
           </div>
         ) : (
           <div className="order-button">
-            <Button>Nothing in your cart!</Button>
+          <Button onClick={(e) =>{
+                e.preventDefault();
+                }
+              }>
+                Nothing in your cart!</Button>
           </div>
         )}
       </form>
