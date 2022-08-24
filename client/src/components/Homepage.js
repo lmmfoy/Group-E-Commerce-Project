@@ -37,28 +37,6 @@ const Homepage = () => {
         <HomepageBox>
           <img src={img21} width="1000px" alt="watch" />
         </HomepageBox>
-        <FactsStyle>
-          <ItemCategory>
-            <Visual>
-              <img src={img23} width="600px" alt="watch" />
-              <div className="text">
-                <div className="nameItems">
-                  <p>Interesting Facts</p>
-                </div>
-              </div>
-            </Visual>
-          </ItemCategory>
-          <ItemCategory>
-            <Visual>
-              <img src={img22} width="600px" alt="watch" />
-              <div className="text">
-                <div className="nameItems">
-                  <p>About Us</p>
-                </div>
-              </div>
-            </Visual>
-          </ItemCategory>
-        </FactsStyle>
       </>
     </Container>
   );
@@ -66,20 +44,15 @@ const Homepage = () => {
 
 const Container = styled.div`
   position: relative;
-  margin-bottom: 150px;
-`;
-const FactsStyle = styled.div`
-  display: flex;
-  justify-content: space-around;
-  margin-top: -200px;
+  margin-bottom: 50px;
 `;
 const HomepageBox = styled.div`
   width: 100%;
   height: 100vh;
   img {
-    margin-top: 250px;
+    margin-top: 100px;
     width: 100%;
-    height: 40%;
+    height: 50%;
     object-fit: cover;
   }
 `;
@@ -132,42 +105,4 @@ const TextBoxTwo = styled.div`
   margin-bottom: -20px;
 `;
 
-const ItemCategory = styled.div`
-  width: 25%;
-  padding-left: 12px;
-  padding-right: 12px;
-  margin-bottom: 24px;
-  transform: translate(0px, 0px);
-  margin: 20px;
-
-  img {
-    background: #fafafa;
-    border-radius: 4px;
-    box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
-  }
-  img:hover {
-    box-shadow: 0 0 45px 2px #1cd6ce;
-    opacity: 70%;
-  }
-`;
-
-const Visual = styled.div`
-  .text {
-    color: #fff;
-    transition: 0.2s ease;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
-  .nameItems {
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    line-height: 1.5;
-    p {
-      font-size: 50px;
-    }
-  }
-`;
 export default Homepage;
