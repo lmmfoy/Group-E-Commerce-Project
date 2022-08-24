@@ -58,10 +58,10 @@ const Cart = () => {
         .then((json) => {
           if (json.status === 200) {
             sessionStorage.clear();
+            setNumCartItems(0)
           }
         });
       navigate("/cart/confirmed");
-      // }
     });
   };
 
