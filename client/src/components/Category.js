@@ -32,11 +32,11 @@ const Category = () => {
   return (
     <TopCategory>
       <Box>
-        <>
+        <TopCategoryInner>
           <Visual>
             <img className="Img" src={img7} width="1000px" alt="watch" />
           </Visual>
-          <>
+          <Content>
             <h1>Category</h1>
             <ItemsCategory>
               {category.map((item) => {
@@ -79,8 +79,8 @@ const Category = () => {
                 );
               })}
             </ItemsCategory>
-          </>
-        </>
+          </Content>
+        </TopCategoryInner>
       </Box>
     </TopCategory>
   );
@@ -148,5 +148,14 @@ const ItemCategoryBtn = styled.button`
     box-shadow: 0 0 45px 2px #1cd6ce;
     opacity: 70%;
   }
+`;
+
+const Content = styled.div`
+`;
+
+const TopCategoryInner = styled.div`
+  /* position: absolute;
+    width: 60%;
+    height: 100%; */
 `;
 export default Category;
