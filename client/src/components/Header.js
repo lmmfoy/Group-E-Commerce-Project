@@ -62,7 +62,6 @@ const StyledImageLink = styled(NavLink)`
   }
   &.active {
     border-radius: 8px;
-    box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
     border: none;
   }
 `;
@@ -76,7 +75,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
   height: 64px;
 
   .sticky {
@@ -116,7 +114,6 @@ const StyledNavLink = styled(NavLink)`
     opacity: 0.5;
     border-radius: 8px;
     color: white;
-    box-shadow: 10px 10px 8px 0 rgba(128, 128, 128, 0.44);
     border: none;
   }
 `;
