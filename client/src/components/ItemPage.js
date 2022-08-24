@@ -75,16 +75,16 @@ const ItemPage = () => {
         {/* Conditional rendering below */}
         {loading && (
           <Container>
-            <div class="product-image">
+            <div className="product-image">
               <img alt="base64 encoded URL of product" src={product.imageSrc} />
             </div>
             <div className="company-style">
-              <a href={company.url} class="company-name">
+              <a href={company.url} className="company-name">
                 {company.name}
                 {/* Add company country flag */}
                 {company.countryCode && (
                   <ReactCountryFlag
-                    class="flag"
+                    className="flag"
                     countryCode={`${company.countryCode}`}
                   />
                 )}

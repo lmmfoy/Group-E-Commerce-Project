@@ -71,11 +71,11 @@ const Cart = () => {
   return (
     <StyledCart>
       <form>
-        <div class="titles">
-          <div class="product-title">Product</div>
-          <div class="short-title">Price</div>
-          <div class="short-title">Quantity</div>
-          <div class="short-title">Subtotal</div>
+        <div className="titles">
+          <div className="product-title">Product</div>
+          <div className="short-title">Price</div>
+          <div className="short-title">Quantity</div>
+          <div className="short-title">Subtotal</div>
         </div>
         <div>
           {Object.values(cart).map((item) => {
@@ -86,7 +86,7 @@ const Cart = () => {
             //slice the array to remove the option of picking zero
             let slicedStockArray = inStockArray.slice(1);
             return (
-              <div class="cart-item">
+              <div className="cart-item">
                 <button
                   className="btn-remove"
                   onClick={(e) => {
@@ -100,15 +100,15 @@ const Cart = () => {
                 >
                   X
                 </button>
-                <Link to={`/products/${item._id}`} class="item-name">
+                <Link to={`/products/${item._id}`} className="item-name">
                   {item.name}
                 </Link>
-                <div class="item-price">${itemPrice}</div>
-                <div class="item-quantity">
+                <div className="item-price">${itemPrice}</div>
+                <div className="item-quantity">
                   <select
                     id={item._id}
                     value={item.quantity}
-                    class="select"
+                    className="select"
                     // When number changed, cart updated in sessionStorage and added to cartState to prompt useEffect to rerender page
                     onChange={(e) => {
                       const value = parseInt(e.target.value);
@@ -123,21 +123,21 @@ const Cart = () => {
                     })}
                   </select>{" "}
                 </div>
-                <div class="item-subtotal">
+                <div className="item-subtotal">
                   ${(itemPrice * item.quantity).toFixed(2)}
                 </div>
               </div>
             );
           })}
         </div>
-        <div class="total">Total: ${total.toFixed(2)}</div>
+        <div className="total">Total: ${total.toFixed(2)}</div>
         {/* Can only click order button if there is a product in the cart */}
         {total ? (
-          <div class="order-button">
+          <div className="order-button">
             <Button onClick={handlePlaceOrder}>Place your order</Button>
           </div>
         ) : (
-          <div class="order-button">
+          <div className="order-button">
             <Button>Nothing in your cart!</Button>
           </div>
         )}

@@ -12,15 +12,15 @@ const Homepage = () => {
       <VideoPage />
       <TextBox>
         <h3>You're bad with time.</h3>
-        <p class="missed"> You missed your bus this morning.</p>
+        <p className="missed"> You missed your bus this morning.</p>
         <p>
           You were late to that important meeting, worked right through your
           lunch date, and left your daughter waiting 3 hours for pickup after
           band practice.
         </p>
-        <p class="how">How do we know?</p>
+        <p className="how">How do we know?</p>
         <p>Nevermind that.</p>
-        <div class="here-for-you">
+        <div className="here-for-you">
           <p>You need help </p>
           <h3>AND WE'RE HERE FOR YOU</h3>
         </div>
